@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+
+<body>
+
+    <div th:insert="~{fragments/menus.html :: menuPrincipal}"></div>
+    <h1>Companies</h1>
+    <table class="entity-list">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Editar</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr th:each="company : ${companies}" th:if="${company.name}">
+                <td th:text="${company.name}"></td>
+                <td>
+                    <a th:href="@{/company/edit-form/{id}(id=${company.id})}">Editar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+
+</html>

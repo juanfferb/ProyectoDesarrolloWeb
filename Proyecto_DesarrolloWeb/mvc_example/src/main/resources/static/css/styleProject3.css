@@ -1,0 +1,63 @@
+.BarraNavegacion3 {
+    background-color: #ff0000; /* Fondo rojo */
+    overflow: hidden;
+    position: fixed; /* Fija la barra en la parte superior de la página */
+    top: 0; /* Alinea la barra con la parte superior de la página */
+    left: 0; /* Alinea la barra con la parte izquierda de la página */
+    width: 100%; /* Asegura que la barra ocupe todo el ancho de la página */
+    z-index: 1000; /* Asegura que la barra esté por encima de otros elementos */
+}
+
+.BarraNavegacion3 ul {
+    list-style-type: none; /* Elimina los puntos de la lista */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Para alinear los elementos en una fila */
+    justify-content: space-between; /* Espacia uniformemente los elementos */
+    align-items: stretch; /* Asegura que todos los elementos tengan la misma altura */
+    border: 1px solid #000000; /* Borde negro alrededor de toda la barra */
+}
+
+.BarraNavegacion3 li {
+    border-right: 1px solid #000000; /* Borde derecho negro para la separación */
+}
+
+.BarraNavegacion3 li:last-child {
+    border-right: none; /* Elimina el borde derecho del último elemento */
+}
+
+.BarraNavegacion3 li:first-child {
+    flex-grow: 0; /* No permite que el primer elemento crezca */
+    flex-shrink: 0; /* No permite que el primer elemento se encoja */
+}
+
+.BarraNavegacion3 li:not(:first-child) {
+    flex-grow: 1; /* Hace que los otros elementos crezcan uniformemente */
+    text-align: center; /* Centra el texto en cada casilla */
+    display: flex; /* Para alinear verticalmente */
+    align-items: center; /* Alinea verticalmente los elementos en el centro */
+    justify-content: center; /* Alinea horizontalmente los elementos en el centro */
+}
+
+.BarraNavegacion3 li img {
+    vertical-align: middle; /* Centra verticalmente la imagen */
+    max-height: 50px; /* Tamaño máximo de la imagen */
+    max-width: 100%; /* Asegura que la imagen no se salga del contenedor */
+}
+
+.BarraNavegacion3 p {
+    margin: 0;
+    padding: 14px 16px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.BarraNavegacion3 li:not(:first-child):hover p {
+    background-color: #000000; /* Cambia el fondo cuando pasas el ratón por encima de los otros elementos */
+    width: 100%; /* Asegura que el fondo cubra todo el ancho del contenedor */
+    height: 100%; /* Asegura que el fondo cubra toda la altura del contenedor */
+    display: flex;
+    align-items: center; /* Centra verticalmente el texto */
+    justify-content: center; /* Centra horizontalmente el texto */
+}

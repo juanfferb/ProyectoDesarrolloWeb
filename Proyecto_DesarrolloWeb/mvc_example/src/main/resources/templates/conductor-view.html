@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" th:href="@{/css/styleProject.css}">
+</head>
+
+<body>
+    <div class="BarraNavegacion">
+        <ul>
+            <li><img src="https://julicastiblanco.wordpress.com/wp-content/uploads/2017/02/wordpress-biarticulado-01.png?w=1000" height="60px" alt="Logo"></li>
+            <li><a th:href="@{/conductor/list}">Coordinador</a></li>
+            <li><p>Rutas</p></li>
+            <li><p>Buses</p></li>
+        </ul>
+    </div>
+
+    <h2 class="tituloConductores">Conductor</h2>
+
+    <div class="conductor-info-container">
+        <!-- Icono de perfil -->
+        <img class="profile-icon" src="https://i.pinimg.com/236x/14/43/55/144355d7b36c5f646435423798281ce9.jpg" alt="Icono de Perfil">
+        
+        <!-- Detalles del conductor -->
+        <div class="conductor-details">
+            <div class="detail-item">
+                <span class="label">Nombre:</span>
+                <span th:text="${conductor.nombre}"></span>
+            </div>
+            <div class="detail-item">
+                <span class="label">Cédula:</span>
+                <span th:text="${conductor.cedula}"></span>
+            </div>
+            <div class="detail-item">
+                <span class="label">Teléfono:</span>
+                <span th:text="${conductor.telefono}"></span>
+            </div>
+            <div class="detail-item">
+                <span class="label">Dirección:</span>
+                <span th:text="${conductor.direccion}"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="button-container1">
+        <a class="volver-button" th:href="@{/conductor/list}">Volver</a>
+    </div>
+
+</body>
+
+</html>

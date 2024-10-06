@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" th:href="@{/css/styleProject.css}">
+</head>
+
+<body>
+    <div class="BarraNavegacion">
+        <ul>
+            <li><img src="https://julicastiblanco.wordpress.com/wp-content/uploads/2017/02/wordpress-biarticulado-01.png?w=1000" height="60px" alt="Logo"></li>
+            <li><a th:href="@{/conductor/list}">Coordinador</a></li>
+            <li><p>Rutas</p></li>
+            <li><p>Buses</p></li>
+        </ul>
+    </div>
+    <div th:insert="~{fragments/menus.html :: menuPrincipal}"></div>
+
+    <div class="formcontainer">
+        <h1 class="tituloConductores">Crear asignación</h1>
+        <form th:action="@{/asignacion/create}" th:object="${asignacion}" method="post">
+        
+        <div class="form-group">
+        <label for="bus">Bus:</label>
+        <select id="bus" name="bus" required>
+        <option th:each="bus : ${buses}" th:value="${bus.id}" th:text="${bus.modelo}"></option>
+        </select>
+        <br/>
+        </div>
+        <div class="form-group">
+        <label for="ruta">Ruta:</label>
+        <select id="ruta" name="ruta" required>
+        <option th:each="ruta : ${rutas}" th:value="${ruta.id}" th:text="${ruta.nombre}"></option>
+        </select>
+        <br/>
+        </div>
+        <div class="form-group">
+        <label for="diasAsignacion">Días de Asignación:</label>
+        <div>
+        <label><input type="checkbox" name="diasAsignacion" value="Lunes"> Lunes</label>
+        <label><input type="checkbox" name="diasAsignacion" value="Martes"> Martes</label>
+        <label><input type="checkbox" name="diasAsignacion" value="Miércoles"> Miércoles</label>
+        <label><input type="checkbox" name="diasAsignacion" value="Jueves"> Jueves</label>
+        <label><input type="checkbox" name="diasAsignacion" value="Viernes"> Viernes</label>
+        <label><input type="checkbox" name="diasAsignacion" value="Sábado"> Sábado</label>
+        <label><input type="checkbox" name="diasAsignacion" value="Domingo"> Domingo</label>
+        </div>
+        </div>
+        <div class="button-container">
+        <button type="submit" class="botonRojo">Guardar</button>
+        <a class="cancel-button" th:href="@{/asignacion/view}">Cancelar</a>
+        </div>
+        </form>
+    </div>
+    
+</body>
+</html>

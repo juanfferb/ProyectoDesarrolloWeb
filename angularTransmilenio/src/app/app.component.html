@@ -1,0 +1,19 @@
+<div class="BarraNavegacion">
+  <ul>
+      <li>
+          <img src="https://julicastiblanco.wordpress.com/wp-content/uploads/2017/02/wordpress-biarticulado-01.png?w=1000" height="60" alt="Logo">
+      </li>
+      <li>
+        <a [routerLink]="['/conductor/conductor-list']">Coordinador</a>
+    </li>
+    
+      <li>
+        <a [routerLink]="['/ruta']">Rutas</a>
+      </li>
+      <li>
+          <p>Buses</p>
+      </li>
+  </ul>
+</div>
+<div th:insert="~{fragments/menus.html :: menuPrincipal}"></div>
+<router-outlet></router-outlet>

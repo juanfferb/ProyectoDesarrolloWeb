@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" th:href="@{/css/styleProject.css}">
+</head>
+
+<body>
+    <div class="BarraNavegacion">
+        <ul>
+            <li><img src="https://julicastiblanco.wordpress.com/wp-content/uploads/2017/02/wordpress-biarticulado-01.png?w=1000" height="60px" alt="Logo"></li>
+            <li><a th:href="@{/conductor/list}">Coordinador</a></li>
+            <li><p>Rutas</p></li>
+            <li><p>Buses</p></li>
+        </ul>
+    </div>
+    <div th:insert="~{fragments/menus.html :: menuPrincipal}"></div>
+
+    <div class="formcontainer">
+        <h1 class="tituloConductores">Crear conductor</h1>
+        <form th:action="@{/conductor/create}" th:object="${conductor}" method="post">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" th:field="*{nombre}" required/>
+                <br/>
+            </div>
+            <div class="form-group">
+                <label for="cedula">Cédula:</label>
+                <input type="text" id="cedula" th:field="*{cedula}" required/>
+                <br/>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="text" id="telefono" th:field="*{telefono}" required/>
+                <br/>
+            </div>
+            <div class="form-group">
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" th:field="*{direccion}" required/>
+                <br/>
+            </div>
+            <div class="button-container">
+                <button type="submit" class="botonRojo">Guardar</button>
+                <a class="cancel-button" th:href="@{/conductor/list}">Cancelar</a>
+            </div>
+        </form>
+    </div>
+    
+</body>
+</html>

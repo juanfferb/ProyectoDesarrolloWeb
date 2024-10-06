@@ -1,0 +1,50 @@
+<p>conductor-search works!</p>
+<div class="BarraNavegacion">
+    <ul>
+        <li><img src="https://julicastiblanco.wordpress.com/wp-content/uploads/2017/02/wordpress-biarticulado-01.png?w=1000" height="60px" alt="Logo"></li>
+        <li><a [routerLink]="['/conductor/conductor-list']">Coordinador</a></li>
+        <li><p>Rutas</p></li>
+        <li><p>Buses</p></li>
+    </ul>
+</div>
+<div th:insert="~{fragments/menus.html :: menuPrincipal}"></div>
+
+<h1 class="tituloConductores">Conductores</h1>
+
+<form class="buscarConductorForm" method="get" action="#" th:action="@{/conductor/search}">
+    <label for="searchText">Buscar por nombre:</label>
+    <input type="text" id="searchText" name="searchText">
+    <button type="submit">Buscar</button>
+</form>
+
+<table class="entity-list">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Cédula</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+            <th>Ver</th>
+            <th>Editar</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr th:each="c : ${conductores}" th:if="${c.nombre}">
+            <td th:text="${c.nombre}"></td>
+            <td th:text="${c.cedula}"></td>
+            <td th:text="${c.telefono}"></td>
+            <td th:text="${c.direccion}"></td>
+            <td>
+                <a class="botonRojo" th:href="@{/conductor/view/{id}(id=${c.id})}">Ver</a>
+            </td>
+            <td>
+                <a class="botonRojo" th:href="@{/conductor/edit-form/{id}(id=${c.id})}">Editar</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="button-container1">
+    <a class="volver-button" [routerLink]="['/conductor/conductor-list']">Volver</a>
+</div>

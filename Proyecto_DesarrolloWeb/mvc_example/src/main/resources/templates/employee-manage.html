@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+
+<body>
+
+    <h1>Company</h1>
+    <p th:text="${company.name}"></p>
+
+    <h2>Employees</h2>
+    <p class="alert">Ejercicio 1: ¿Cómo evitar que haya empleados repetidos aquí?</p>
+    <p class="alert">Ejercicio 2: Implementar "Remover" lo más optimamente posible</p>
+    <table class="entity-list">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr th:each="employee : ${company.employees}" th:if="${employee.firstName}">
+                <td th:text="${employee.firstName}"></td>
+                <td th:text="${employee.lastName}"></td>
+                <td th:text="${employee.email}"></td>
+                <td>
+                    <a
+                        th:href="@{/company/{idCompany}/employees/remove/{idEmployee}(idCompany=${company.id}, idEmployee=${employee.id})}">
+                        Remover
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Agregar nuevo empleado</h2>
+    <a th:href="@{/person/search}">Buscar</a>
+    <table class="entity-list">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr th:each="person : ${availablePersons}" th:if="${person.firstName}">
+                <td th:text="${person.firstName}"></td>
+                <td th:text="${person.lastName}"></td>
+                <td th:text="${person.email}"></td>
+                <td>
+                    <a
+                        th:href="@{/company/{idCompany}/add/{idEmployee}(idCompany=${company.id}, idEmployee=${person.id})}">Agregar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/company/edit-form/{id}(id=${company.id})}">Volver</a>
+</body>
+
+</html>

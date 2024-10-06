@@ -1,0 +1,39 @@
+<p>asignacion-view works!</p>
+<div class="BarraNavegacion">
+    <ul>
+        <li><img src="https://julicastiblanco.wordpress.com/wp-content/uploads/2017/02/wordpress-biarticulado-01.png?w=1000" height="60px" alt="Logo"></li>
+        <li><a [routerLink]="['/conductor/conductor-list']">Coordinador</a></li>
+        <li><p>Rutas</p></li>
+        <li><p>Buses</p></li>
+    </ul>
+</div>
+<h1 class="tituloConductores">Asignaciones Conductores</h1>
+<table class="entity-list">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Bus</th>
+            <th>Ruta</th>
+            <th>Días de Asignación</th>
+            <th>Eliminar</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="asignacion : ${asignaciones}">
+            <td th:text="${asignacion.id}"></td>
+            <td th:text="${asignacion.bus.modelo}"></td>
+            <td th:text="${asignacion.ruta.nombre}"></td>
+            <td th:text="${asignacion.diasAsignacion}"></td>
+            <td>
+                <form th:action="@{/asignacion/delete/{id}(id=${asignacion.id})}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta asignación?');">
+                    <button type="submit" class="botonRojo">Eliminar</button>
+                </form>
+            </td>                
+        </tr>
+    </tbody>
+</table>
+
+<div class="button-container1">
+    <a class="volver-button" [routerLink]="['/conductor/conductor-list']">Volver</a>
+    <a class="botonRojoBuscar" th:href="@{/asignacion/create}">Agregar</a>
+</div>

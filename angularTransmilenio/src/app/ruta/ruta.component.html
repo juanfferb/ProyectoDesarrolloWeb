@@ -1,0 +1,60 @@
+<p>ruta works!</p>
+
+<!-- Si quieres usar este div, asegúrate de abrirlo correctamente -->
+<div class="BarraNavegacion">
+    <ul>
+        <li><img src="https://julicastiblanco.wordpress.com/wp-content/uploads/2017/02/wordpress-biarticulado-01.png?w=1000" height="60px" alt="Logo"></li>
+        <li><a [routerLink]="['/conductor/conductor-list']">Coordinador</a></li>
+        <li><a [routerLink]="['/ruta']">Rutas</a></li>
+        <li><p>Buses</p></li>
+    </ul>
+</div>
+
+<img class="rutas1" src="https://www.sitp.gov.co/publicaciones/40236/mapas-transmilenio/info/sitp/media/img75080.jpg" alt="Rutas">
+
+<p class="Texto1">
+    Como administrador tiene la opción de visualizar las rutas existentes que pueden tener los conductores, 
+    lo que facilita la gestión de las mismas, adicionalemnte, puede ver las estaciones que tiene asociada esta ruta,
+    ver la ruta detalladamente y editar o elimiar esta ruta.
+</p>
+
+<table class="entity-list">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Estaciones</th>
+            <th>Ver</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="c : ${conductores}" th:if="${c.nombre}">
+            <td th:text="${c.nombre}"></td>
+            <td>
+                <a class="botonRojo" th:href="@{/asignacion/view/{id}(id=${c.id})}">Ver</a>
+            </td>
+            <td>
+                <a class="botonRojo" th:href="@{/conductor/view/{id}(id=${c.id})}">Ver</a>
+            </td>
+            <td>
+                <a class="botonRojo" th:href="@{/conductor/edit-form/{id}(id=${c.id})}">Editar</a>
+            </td>
+            <td>
+                <form action="#" th:action="@{/conductor/delete/{id}(id=${c.id})}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta ruta?');">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button type="submit" class="botonRojo">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<img class="rutas2" src="https://laud.udistrital.edu.co/sites/default/files/imagen-noticia/2022-11/laud-transmilenio-semana.jpg" alt="Conductores2">
+
+<p class="Texto2">
+    Adicionalemnte puede crear nuevas rutas según sea necesario, 
+    asegurando así una mejor coordinación y facilidad en la administración de rutas.
+</p>
+
+<a class="botonRojoBuscar" [routerLink]="['/conductor/conductor-create']">Agregar Ruta</a>

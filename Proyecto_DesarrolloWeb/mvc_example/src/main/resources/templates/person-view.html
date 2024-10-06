@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+
+</head>
+
+<body>
+    <h1>Persona</h1>
+    <p th:text="|Nombre: ${person.firstName}|"></p>
+    <p th:text="|Apellido: ${person.lastName}|"></p>
+    <p th:text="|Email: ${person.email}|"></p>
+    <a th:href="@{/person/list}">Volver</a>
+</body>
+
+</html>

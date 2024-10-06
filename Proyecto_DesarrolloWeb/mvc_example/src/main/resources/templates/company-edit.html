@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+
+<body>
+    <div class="formcontainer">
+        <h1>Company</h1>
+        <form action="#" th:action="@{/company/save}" th:object="${company}" method="post">
+            <input type="hidden" th:field="*{id}" id="id">
+            <label for="companyName">Nombre: </label>
+            <input type="text" th:field="*{name}" id="companyName">
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                th:class="${#fields.hasErrors('name')} ? 'error' : ''"></span>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    <a th:href="@{/company/employee-add-form/{id}(id=${company.id})}">Empleados</a>
+
+    <a th:href="@{/company/list}">Cancelar</a>
+</body>
+
+</html>

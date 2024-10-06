@@ -1,0 +1,441 @@
+.BarraNavegacion {
+    background-color: #ff0000; /* Fondo rojo */
+    overflow: hidden;
+    position: fixed; /* Fija la barra en la parte superior de la página */
+    top: 0; /* Alinea la barra con la parte superior de la página */
+    left: 0; /* Alinea la barra con la parte izquierda de la página */
+    width: 100%; /* Asegura que la barra ocupe todo el ancho de la página */
+    z-index: 1000; /* Asegura que la barra esté por encima de otros elementos */
+}
+
+.BarraNavegacion a {
+    text-decoration: none; /* Elimina el subrayado */
+    color: white; /* Color del texto de los enlaces */
+    display: block; /* Asegura que el enlace ocupe todo el espacio del contenedor */
+    padding: 14px 16px; /* Ajusta el padding para alinear el texto */
+}
+
+.BarraNavegacion a:hover,
+.BarraNavegacion a:focus,
+.BarraNavegacion a:active {
+    text-decoration: none; 
+    color: white; 
+    background-color: #000000; 
+}
+
+.BarraNavegacion a.active {
+    background-color: #333333; 
+    color: white; 
+}
+
+.BarraNavegacion ul {
+    list-style-type: none; /* Elimina los puntos de la lista */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Para alinear los elementos en una fila */
+    justify-content: space-between; /* Espacia uniformemente los elementos */
+    align-items: stretch; /* Asegura que todos los elementos tengan la misma altura */
+    border: 1px solid #000000; /* Borde negro alrededor de toda la barra */
+}
+
+.BarraNavegacion li {
+    border-right: 1px solid #000000; /* Borde derecho negro para la separación */
+}
+
+.BarraNavegacion li:last-child {
+    border-right: none; /* Elimina el borde derecho del último elemento */
+}
+
+.BarraNavegacion li:first-child {
+    flex-grow: 0; /* No permite que el primer elemento crezca */
+    flex-shrink: 0; /* No permite que el primer elemento se encoja */
+}
+
+.BarraNavegacion li:not(:first-child) {
+    flex-grow: 1; /* Hace que los otros elementos crezcan uniformemente */
+    text-align: center; /* Centra el texto en cada casilla */
+    display: flex; /* Para alinear verticalmente */
+    align-items: center; /* Alinea verticalmente los elementos en el centro */
+    justify-content: center; /* Alinea horizontalmente los elementos en el centro */
+}
+
+.BarraNavegacion li img {
+    vertical-align: middle; /* Centra verticalmente la imagen */
+    max-height: 50px; /* Tamaño máximo de la imagen */
+    max-width: 100%; /* Asegura que la imagen no se salga del contenedor */
+}
+
+.BarraNavegacion p {
+    margin: 0;
+    padding: 14px 16px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.BarraNavegacion li:not(:first-child):hover p {
+    background-color: #000000; /* Cambia el fondo cuando pasas el ratón por encima de los otros elementos */
+    width: 100%; /* Asegura que el fondo cubra todo el ancho del contenedor */
+    height: 100%; /* Asegura que el fondo cubra toda la altura del contenedor */
+    display: flex;
+    align-items: center; /* Centra verticalmente el texto */
+    justify-content: center; /* Centra horizontalmente el texto */
+}
+
+.TablaConductores {
+    border-collapse: collapse;
+    width: 50%;
+    margin: 50px auto;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #ff0000;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+.TablaConductores caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+    text-align: center;
+}
+
+h2{
+    padding-top: 80px;
+    justify-content: center;
+}
+/* Estilos para la información del conductor */
+.conductor-info-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 50%;
+    margin: 20px auto; /* Centra el contenedor */
+}
+
+.profile-icon {
+    margin-right: 50px;
+    border-radius: 50%;
+    width: 300px;
+    height: 300px;
+}
+
+.conductor-details {
+    display: flex;
+    flex-direction: column;
+    font-size: 30px; /* Tamaño de letra más grande para los detalles del conductor */
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.button-container1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.volver-button {
+    display: inline-block;
+    background-color: #ff0000; /* Fondo rojo */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    text-decoration: none; /* Sin subrayado */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Sombra para darle efecto de botón */
+    transition: background-color 0.3s ease; /* Efecto de transición al pasar el mouse */
+    font-size: 18px; /* Tamaño de letra más grande para el botón */
+}
+
+.volver-button:hover {
+    background-color: #cc0000; /* Cambia el fondo al pasar el mouse */
+}
+
+
+.formcontainer {
+    margin: 20px auto;
+    padding-top: 50px;
+    padding: 20px;
+    max-width: 600px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.formcontainer h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group .error {
+    color: red;
+    font-size: 0.875em;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.save-button {
+    background-color: #ff0000;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.save-button:hover {
+    background-color: #cc0000;
+}
+
+.cancel-button {
+    display: inline-block;
+    background-color: #cccccc;
+    color: black;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-button:hover {
+    background-color: #999999;
+}
+
+.botonRojo {
+    display: inline-block;
+    background-color: #ff0000; 
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    text-decoration: none; /* Sin subrayado */
+    border-radius: 5px; /* Bordes redondeados */
+    text-align: center; /* Centra el texto en el botón */
+    margin: 5px; /* Espaciado externo */
+}
+
+.botonRojo:hover {
+    background-color: #cc0000; /* Cambia el fondo al pasar el mouse */
+}
+
+.entity-list {
+    border-collapse: collapse;
+    width: 80%; /* Ancho de la tabla */
+    margin: 50px auto; /* Centra la tabla horizontalmente */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center; /* Centra el texto en las celdas */
+}
+
+th {
+    background-color: #ff0000;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+/* Centrar el título "Conductores" */
+.tituloConductores {
+    text-align: center; /* Centra el texto */
+    font-size: 36px; /* Tamaño de fuente más grande */
+    font-weight: bold; /* Negrita para resaltar */
+    color: #ff0000; /* Color rojo a juego con la barra de navegación */
+    margin-top: 20px; /* Margen superior para separar del menú */
+    margin-bottom: 40px; /* Espacio debajo del título */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Sombra para dar efecto */
+}
+
+/* Estilizar Texto1 */
+.Texto1 {
+    font-size: 18px; /* Tamaño de letra legible */
+    line-height: 1.6; /* Espaciado entre líneas */
+    color: #333; /* Color de texto gris oscuro */
+    margin: 20px auto; /* Espacio alrededor del texto */
+    max-width: 100%; /* Ocupa todo el ancho de la página */
+    text-align: justify; /* Justificar el texto para un aspecto limpio */
+    padding: 20px; /* Añadir relleno para mejorar la legibilidad */
+    background-color: #f9f9f9; /* Fondo claro para resaltar */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para el contenedor */
+    box-sizing: border-box; /* Incluir padding y border en el ancho total */
+}
+
+/* Estilizar Texto2 */
+.Texto2 {
+    font-size: 18px; /* Tamaño de letra legible */
+    line-height: 1.6; /* Espaciado entre líneas */
+    color: #333; /* Color de texto gris oscuro */
+    margin: 20px auto; /* Espacio alrededor del texto */
+    max-width: 100%; /* Ocupa todo el ancho de la página */
+    text-align: justify; /* Justificar el texto para un aspecto limpio */
+    padding: 20px; /* Añadir relleno para mejorar la legibilidad */
+    background-color: #f9f9f9; /* Fondo claro para resaltar */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para el contenedor */
+    box-sizing: border-box; /* Incluir padding y border en el ancho total */
+}
+
+.botonRojoBuscar {
+    display: block; /* Cambio para permitir el centrado con margin auto */
+    width: fit-content; /* Ajusta el ancho del botón al contenido */
+    margin: 30px auto; /* Centra el botón horizontalmente */
+    background-color: #ff0000; /* Fondo rojo */
+    color: white; /* Texto blanco */
+    padding: 10px 20px; /* Espaciado interno */
+    font-family: Arial, sans-serif; /* Fuente consistente */
+    text-decoration: none; /* Sin subrayado */
+    border-radius: 5px; /* Bordes redondeados */
+    text-align: center; /* Centra el texto en el botón */
+    font-size: 18px; /* Tamaño de fuente del botón */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para el botón */
+}
+
+.botonRojoBuscar:hover {
+    background-color: #cc0000; /* Fondo más oscuro al pasar el ratón */
+}
+
+/* Contenedor para centrar las imágenes */
+.imagenes-container {
+    display: flex; /* Usa flexbox para alinear las imágenes */
+    justify-content: center; /* Centra las imágenes horizontalmente */
+    gap: 20px; /* Espacio entre las imágenes */
+    margin: 40px 0; /* Espacio arriba y abajo del contenedor de imágenes */
+}
+
+.conductores1 {
+    display: block; /* Para que se comporte como un bloque */
+    margin: 20px auto; /* Margen superior e inferior de 20px y centrado horizontal */
+    max-width: 90%; /* Ajusta el tamaño máximo de la imagen */
+    height: auto; /* Mantiene la relación de aspecto */
+    border-radius: 8px; /* Bordes redondeados para un aspecto estético */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+}
+
+/* Estilo para la segunda imagen de conductores */
+.conductores2 {
+    display: block; /* Para que se comporte como un bloque */
+    margin: 20px auto; /* Margen superior e inferior de 20px y centrado horizontal */
+    max-width: 90%; /* Ajusta el tamaño máximo de la imagen */
+    height: auto; /* Mantiene la relación de aspecto */
+    border-radius: 8px; /* Bordes redondeados para un aspecto estético */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+}
+
+/* Estilo para el contenedor del formulario */
+.buscarConductorForm {
+    max-width: 600px; /* Ancho máximo del formulario */
+    margin: 0 auto; /* Centra el formulario horizontalmente */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #ddd; /* Borde gris claro alrededor del formulario */
+    border-radius: 8px; /* Bordes redondeados para un aspecto más suave */
+    background-color: #f9f9f9; /* Color de fondo claro */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
+}
+
+/* Estilo para las etiquetas del formulario */
+.buscarConductorForm label {
+    display: block; /* Asegura que las etiquetas ocupen toda la línea */
+    margin-bottom: 10px; /* Espaciado inferior */
+    font-weight: bold; /* Texto en negrita */
+    color: #333; /* Color del texto */
+}
+
+/* Estilo para los campos de entrada */
+.buscarConductorForm input[type="text"] {
+    width: 100%; /* Ancho completo del contenedor */
+    padding: 10px; /* Espaciado interno */
+    border: 1px solid #ddd; /* Borde gris claro */
+    border-radius: 4px; /* Bordes redondeados */
+    box-sizing: border-box; /* Asegura que el padding y el borde se incluyan en el ancho total */
+    margin-bottom: 20px; /* Espaciado inferior */
+}
+
+/* Estilo para el botón de envío */
+.buscarConductorForm button {
+    display: inline-block; /* Muestra el botón en línea */
+    background-color: #ff0000; /* Fondo rojo */
+    color: white; /* Texto blanco */
+    padding: 10px 20px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    transition: background-color 0.3s ease; /* Transición suave para el color de fondo */
+}
+
+/* Efecto al pasar el mouse sobre el botón */
+.buscarConductorForm button:hover {
+    background-color: #cc0000; /* Cambia el color de fondo al pasar el mouse */
+}
+
+form button.botonRojo {
+    border: none; /* Asegura que no haya borde */
+    display: inline-block;
+    background-color: #ff0000; /* Fondo rojo */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    font-family: Arial, sans-serif; /* Fuente consistente */
+    text-decoration: none; /* Sin subrayado */
+    border-radius: 5px; /* Bordes redondeados */
+    text-align: center; /* Centra el texto en el botón */
+    margin: 5px; /* Espaciado externo */
+}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <nav th:fragment="menuPrincipal">
+        <ul class="menu">
+            <li><a th:href="@{/person/list}">Personas</a></li>
+            <li><a th:href="@{/company/list}">Compañias</a></li>
+        </ul>
+    </nav>
+
+</body>
+
+</html>

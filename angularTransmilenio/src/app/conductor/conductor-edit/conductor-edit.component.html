@@ -1,0 +1,45 @@
+<p>conductor-edit works!</p>
+<div class="BarraNavegacion">
+    <ul>
+        <li><img src="https://julicastiblanco.wordpress.com/wp-content/uploads/2017/02/wordpress-biarticulado-01.png?w=1000" height="60px" alt="Logo"></li>
+        <li><a [routerLink]="['/conductor/conductor-list']">Coordinador</a></li>
+        <li><p>Rutas</p></li>
+        <li><p>Buses</p></li>
+    </ul>
+</div>
+
+<div class="formcontainer">
+    <h1>Editar Conductor</h1>
+    <form action="#" th:action="@{/conductor/save}" th:object="${conductor}" method="post">
+        <input type="hidden" th:field="*{id}" id="id">
+
+        <div class="form-group">
+            <label for="conductorNombre">Nombre:</label>
+            <input type="text" th:field="*{nombre}" id="conductorNombre">
+            <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="conductorCedula">Cédula:</label>
+            <input type="text" th:field="*{cedula}" id="conductorCedula">
+            <span th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="conductorTelefono">Teléfono:</label>
+            <input type="text" th:field="*{telefono}" id="conductorTelefono">
+            <span th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="conductorDireccion">Dirección:</label>
+            <input type="text" th:field="*{direccion}" id="conductorDireccion">
+            <span th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}" class="error"></span>
+        </div>
+
+        <div class="button-container">
+            <button type="submit" class="save-button">Guardar</button>
+            <a class="cancel-button" [routerLink]="['/conductor/conductor-list']">Cancelar</a>
+        </div>
+    </form>
+</div>
