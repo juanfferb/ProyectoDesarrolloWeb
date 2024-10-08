@@ -2,24 +2,25 @@ package org.example.persistencia.controller;
 
 import java.util.List;
 
+import org.example.persistencia.dto.ConductorDTO;
 import org.example.persistencia.model.Conductor;
 import org.example.persistencia.service.ConductorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import jakarta.validation.Valid;
 
-@Controller
+@RestController
 @RequestMapping("/conductor")
 public class ConductorController {
 
@@ -29,24 +30,24 @@ public class ConductorController {
     private ConductorService conductorService;
 
     @GetMapping("/list")
-    public ModelAndView listarConductores() {
+    public List<Conductor> listarConductores() {
         List<Conductor> conductores = conductorService.listarconductores();
-        ModelAndView modelAndView = new ModelAndView("conductor-list");
-        modelAndView.addObject("conductores", conductores);
-        return modelAndView;
+        //ModelAndView modelAndView = new ModelAndView("conductor-list");
+        //modelAndView.addObject("conductores", conductores);
+        return conductores;
     }
 
     @GetMapping("/view/{id}")
     public ModelAndView verConductor(@PathVariable("id") Long id) {
-        Conductor conductor = conductorService.recuperarConductor(id);
+        ConductorDTO conductorDTO = conductorService.recuperarConductor(id);
         ModelAndView modelAndView = new ModelAndView("conductor-view");
-        modelAndView.addObject("conductor", conductor);
+        modelAndView.addObject("conductor", conductorDTO);
         return modelAndView;
     }
 
     @GetMapping("/edit-form/{id}")
     public ModelAndView formularioEditarConductor(@PathVariable Long id) {
-        Conductor c = conductorService.recuperarConductor(id);
+        ConductorDTO c = conductorService.recuperarConductor(id);
         ModelAndView modelAndView = new ModelAndView("conductor-edit");
         modelAndView.addObject("conductor", c);
         return modelAndView;
@@ -62,20 +63,20 @@ public class ConductorController {
     }
 
     @GetMapping(value = "/create")
-    public Object nuevoConductor(@Valid Conductor conductor, BindingResult result) {
+    public Object nuevoConductor(@Valid ConductorDTO conductorDTO, BindingResult result) {
     if (result.hasErrors()) {
         return new ModelAndView("conductor-create");
     }
-    conductorService.crearConductor(conductor);
+    conductorService.crearConductor(conductorDTO);
     return new RedirectView("/conductor/list");
     }
 
     @PostMapping(value = "/create")
-    public Object crearConductor(@Valid Conductor conductor, BindingResult result) {
+    public Object crearConductor(@Valid ConductorDTO conductorDTO, BindingResult result) {
     if (result.hasErrors()) {
         return new ModelAndView("conductor-create");
     }
-    conductorService.crearConductor(conductor);
+    conductorService.crearConductor(conductorDTO);
     return new RedirectView("/conductor/list");
     }
 

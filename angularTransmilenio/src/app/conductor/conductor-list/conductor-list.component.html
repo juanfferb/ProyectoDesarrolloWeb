@@ -24,45 +24,43 @@
         diseñada para facilitar la gestión eficiente del personal, garantizando que la operación diaria del 
         sistema Transmilenio se realice de manera ordenada y precisa.</p>
 
-    <table class="entity-list">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Cédula</th>
-                <th>Teléfono</th>
-                <th>Dirección</th>
-                <th>Asignaciones</th>
-                <th>Ver</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
-            </tr>
-        </thead>
-        <tbody>
-
-            <tr th:each="c : ${conductores}" th:if="${c.nombre}">
-                <td th:text="${c.nombre}"></td>
-                <td th:text="${c.cedula}"></td>
-                <td th:text="${c.telefono}"></td>
-                <td th:text="${c.direccion}"></td>
-                <td>
-                    <a class="botonRojo" th:href="@{/asignacion/view/{id}(id=${c.id})}">Ver</a>
-                    <!-- <a class="botonRojo" [routerLink]="['/asignacion-list', conductor.id]">Ver</a> -->
-                </td>
-                <td>
-                    <a class="botonRojo" th:href="@{/conductor/view/{id}(id=${c.id})}">Ver</a>
-                    <!-- <a class="botonRojo" [routerLink]="['/conductor-view', conductor.id]">Ver</a> -->
-                </td>
-                <td>
-                    <a class="botonRojo" th:href="@{/conductor/edit-form/{id}(id=${c.id})}">Editar</a>
-                    <!-- <a class="botonRojo" [routerLink]="['/conductor-edit', conductor.id]">Editar</a> -->
-                </td>
-                <td>
-                    <form action="#" th:action="@{/conductor/delete/{id}(id=${c.id})}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este conductor?');">
-                        <input type="hidden" name="_method" value="delete"/>
-                        <button type="submit" class="botonRojo">Eliminar</button>
-                    </form>
-                </td>
-            </tr>
-            
-        </tbody>
-    </table>
+        <table class="entity-list">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cédula</th>
+                    <th>Teléfono</th>
+                    <th>Dirección</th>
+                    <th>Asignaciones</th>
+                    <th>Ver</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let c of allConductors$ | async">
+                    <tr *ngIf="c.nombre">
+                      <td>{{ c.nombre }}</td>
+                      <td>{{ c.cedula }}</td>
+                      <td>{{ c.telefono }}</td>
+                      <td>{{ c.direccion }}</td>
+                    </tr>
+                  
+                    <td>
+                        <a class="botonRojo" [routerLink]="['/asignacion', c.id]">Ver</a>
+                    </td>
+                    <td>
+                        <a class="botonRojo" [routerLink]="['/conductor-view', c.id]">Ver</a>
+                    </td>
+                    <td>
+                        <a class="botonRojo" [routerLink]="['/conductor-edit', c.id]">Editar</a>
+                    </td>
+                    <td>
+                        <button class="botonRojo" (click)="deleteConductor(c.id!)">Eliminar</button>
+                    </td>
+                </ng-container>
+            </tbody>
+        </table>
+        
+        <div *ngIf="errorMessage">{{ errorMessage }}</div>
+        
