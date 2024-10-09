@@ -20,18 +20,29 @@ public class Ruta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre", nullable = false)
-    @NotBlank(message = "El nombre de la ruta no puede estar en blanco")
-    private String nombre;
+    @Column(name = "codigo", nullable = false)
+    @NotBlank(message = "El codigo de la ruta no puede estar en blanco")
+    private String codigo;
+
+    @Column(name = "estaciones", nullable = false)
+    @NotBlank(message = "Las estaciones de la ruta no pueden estar en blanco")
+    private String estaciones;
+
+    @Column(name = "horario", nullable = false)
+    @NotBlank(message = "El horario de la ruta no puede estar en blanco")
+    private String horario;
 
     @OneToMany(mappedBy = "ruta")
+    @JsonIgnore
     private List<Asignacion> asignaciones = new ArrayList<>();
 
     public Ruta() {
     }
 
-    public Ruta(String nombre) {
-        this.nombre = nombre;
+    public Ruta(String codigo, String estaciones, String horario) {
+        this.codigo = codigo;
+        this.estaciones = estaciones;
+        this.horario = horario;
     }
 
     public Long getId() {
@@ -42,12 +53,28 @@ public class Ruta {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public void setHorario(String Horario) {
+        this.horario = horario;
+    }
+
+    public String getEstaciones() {
+        return estaciones;
+    }
+
+    public void setEstaciones(String Estaciones) {
+        this.estaciones = estaciones;
     }
 
     public List<Asignacion> getAsignaciones() {

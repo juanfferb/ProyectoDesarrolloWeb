@@ -7,30 +7,29 @@
         <li><p>Buses</p></li>
     </ul>
 </div>
-<div th:insert="~{fragments/menus.html :: menuPrincipal}"></div>
 
 <div class="formcontainer">
     <h1 class="tituloConductores">Crear conductor</h1>
-    <form th:action="@{/conductor/create}" th:object="${conductor}" method="post">
+    <form (ngSubmit)="createConductor()">
         <div class="form-group">
             <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" th:field="*{nombre}" required/>
-            <br/>
+            <input type="text" id="nombre" [(ngModel)]="newConductor.nombre" name="nombre" required />
+            <br />
         </div>
         <div class="form-group">
             <label for="cedula">Cédula:</label>
-            <input type="text" id="cedula" th:field="*{cedula}" required/>
-            <br/>
+            <input type="text" id="cedula" [(ngModel)]="newConductor.cedula" name="cedula" required />
+            <br />
         </div>
         <div class="form-group">
             <label for="telefono">Teléfono:</label>
-            <input type="text" id="telefono" th:field="*{telefono}" required/>
-            <br/>
+            <input type="text" id="telefono" [(ngModel)]="newConductor.telefono" name="telefono" required />
+            <br />
         </div>
         <div class="form-group">
             <label for="direccion">Dirección:</label>
-            <input type="text" id="direccion" th:field="*{direccion}" required/>
-            <br/>
+            <input type="text" id="direccion" [(ngModel)]="newConductor.direccion" name="direccion" required />
+            <br />
         </div>
         <div class="button-container">
             <button type="submit" class="botonRojo">Guardar</button>

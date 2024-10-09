@@ -10,31 +10,31 @@
 
 <div class="formcontainer">
     <h1>Editar Conductor</h1>
-    <form action="#" th:action="@{/conductor/save}" th:object="${conductor}" method="post">
-        <input type="hidden" th:field="*{id}" id="id">
+    <form (ngSubmit)="updateConductor()">
+        <input type="hidden" [(ngModel)]="updatedConductor.id" name="id">
 
         <div class="form-group">
             <label for="conductorNombre">Nombre:</label>
-            <input type="text" th:field="*{nombre}" id="conductorNombre">
-            <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="error"></span>
+            <input type="text" id="conductorNombre" [(ngModel)]="updatedConductor.nombre" name="nombre" required />
+            <span *ngIf="errorMessage">{{ errorMessage }}</span>
         </div>
 
         <div class="form-group">
             <label for="conductorCedula">Cédula:</label>
-            <input type="text" th:field="*{cedula}" id="conductorCedula">
-            <span th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}" class="error"></span>
+            <input type="text" id="conductorCedula" [(ngModel)]="updatedConductor.cedula" name="cedula" required />
+            <span *ngIf="errorMessage">{{ errorMessage }}</span>
         </div>
 
         <div class="form-group">
             <label for="conductorTelefono">Teléfono:</label>
-            <input type="text" th:field="*{telefono}" id="conductorTelefono">
-            <span th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" class="error"></span>
+            <input type="text" id="conductorTelefono" [(ngModel)]="updatedConductor.telefono" name="telefono" required />
+            <span *ngIf="errorMessage">{{ errorMessage }}</span>
         </div>
 
         <div class="form-group">
             <label for="conductorDireccion">Dirección:</label>
-            <input type="text" th:field="*{direccion}" id="conductorDireccion">
-            <span th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}" class="error"></span>
+            <input type="text" id="conductorDireccion" [(ngModel)]="updatedConductor.direccion" name="direccion" required />
+            <span *ngIf="errorMessage">{{ errorMessage }}</span>
         </div>
 
         <div class="button-container">

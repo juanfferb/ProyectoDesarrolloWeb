@@ -19,7 +19,9 @@ import lombok.Setter;
 public class RutaDTO {
 
     private Long id;
-    private String nombre;
-    private List<Asignacion> busesAsignados;
+    private String codigo;
+    private String estaciones;
+    private String horario;
+    private List<Asignacion> asignaciones;
 
 }

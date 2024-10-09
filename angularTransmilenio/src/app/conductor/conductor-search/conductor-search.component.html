@@ -7,17 +7,16 @@
         <li><p>Buses</p></li>
     </ul>
 </div>
-<div th:insert="~{fragments/menus.html :: menuPrincipal}"></div>
 
 <h1 class="tituloConductores">Conductores</h1>
 
-<form class="buscarConductorForm" method="get" action="#" th:action="@{/conductor/search}">
+<form class="buscarConductorForm" (ngSubmit)="searchConductors()">
     <label for="searchText">Buscar por nombre:</label>
-    <input type="text" id="searchText" name="searchText">
+    <input type="text" id="searchText" [formControl]="searchControl" required>
     <button type="submit">Buscar</button>
 </form>
 
-<table class="entity-list">
+<table class="entity-list" *ngIf="conductores$ | async as conductores">
     <thead>
         <tr>
             <th>Nombre</th>
@@ -29,21 +28,22 @@
         </tr>
     </thead>
     <tbody>
-
-        <tr th:each="c : ${conductores}" th:if="${c.nombre}">
-            <td th:text="${c.nombre}"></td>
-            <td th:text="${c.cedula}"></td>
-            <td th:text="${c.telefono}"></td>
-            <td th:text="${c.direccion}"></td>
+        <tr *ngFor="let conductor of conductores">
+            <td>{{ conductor.nombre }}</td>
+            <td>{{ conductor.cedula }}</td>
+            <td>{{ conductor.telefono }}</td>
+            <td>{{ conductor.direccion }}</td>
             <td>
-                <a class="botonRojo" th:href="@{/conductor/view/{id}(id=${c.id})}">Ver</a>
+                <a class="botonRojo" [routerLink]="['/conductor/view', conductor.id]">Ver</a>
             </td>
             <td>
-                <a class="botonRojo" th:href="@{/conductor/edit-form/{id}(id=${c.id})}">Editar</a>
+                <a class="botonRojo" [routerLink]="['/conductor/edit', conductor.id]">Editar</a>
             </td>
         </tr>
     </tbody>
 </table>
+
+<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
 <div class="button-container1">
     <a class="volver-button" [routerLink]="['/conductor/conductor-list']">Volver</a>

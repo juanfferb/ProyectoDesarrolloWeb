@@ -2,27 +2,15 @@ package org.example.persistencia.controller;
 
 import java.util.List;
 
-import org.example.persistencia.dto.BusDTO;
 import org.example.persistencia.dto.RutaDTO;
-import org.example.persistencia.model.Bus;
-import org.example.persistencia.model.Ruta;
-import org.example.persistencia.service.BusService;
 import org.example.persistencia.service.RutaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
+
 
 
 @RestController
@@ -35,17 +23,39 @@ public class RutaController {
     @GetMapping("/list")
     public List<Ruta> listarRutas() {
         List<Ruta> rutas = rutaService.listarrutas();
-        //ModelAndView modelAndView = new ModelAndView("bus-list");
-        //modelAndView.addObject("buses", buses);
         return rutas;
     }
 
     @GetMapping("/view/{id}")
-    public RutaDTO verBus(@PathVariable("id") Long id) {
+    public RutaDTO verRuta(@PathVariable("id") Long id) {
         RutaDTO ruta = rutaService.recuperarRuta(id);
-        ModelAndView modelAndView = new ModelAndView("bus-view");
-        modelAndView.addObject("ruta", ruta);
         return ruta;
     
+    }
+
+    @PostMapping("/save")
+    public void guardarRuta(@Valid @RequestBody RutaDTO RutaDTO) {
+        RutaService.guardarRuta(RutaDTO);
+    }
+
+    @PostMapping("/create")
+    public void crearRuta(@Valid @RequestBody RutaDTO RutaDTO) {
+        RutaService.crearRuta(RutaDTO);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void eliminarRuta(@PathVariable("id") Long id) {
+        RutaService.eliminarRuta(id);
+    }
+
+    @GetMapping("/search")
+    public List<RutaDTO> buscarRutas(@RequestParam(required = false) String searchText) {
+        if (searchText == null || searchText.trim().isEmpty()) {
+            log.info("No hay texto de búsqueda. Retornando todos los Rutaes");
+            return RutaService.listarRutas();
+        } else {
+            log.info("Rutacando Rutaes cuyo nombre contiene {}", searchText);
+            return RutaService.buscarPorNombre(searchText);
+        }
     }
 }

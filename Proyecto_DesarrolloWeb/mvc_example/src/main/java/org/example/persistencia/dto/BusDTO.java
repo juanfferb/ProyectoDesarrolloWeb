@@ -13,9 +13,10 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class BusDTO {
-
+    
     private Long id;
     private String placa;
     private String modelo;
+    private List<Ruta> rutasAsignadas;
 
 }
