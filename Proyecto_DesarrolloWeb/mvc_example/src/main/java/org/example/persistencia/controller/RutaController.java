@@ -3,8 +3,11 @@ package org.example.persistencia.controller;
 import java.util.List;
 
 import org.example.persistencia.dto.BusDTO;
+import org.example.persistencia.dto.RutaDTO;
 import org.example.persistencia.model.Bus;
+import org.example.persistencia.model.Ruta;
 import org.example.persistencia.service.BusService;
+import org.example.persistencia.service.RutaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,29 +24,28 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import jakarta.validation.Valid;
 
-@RestController
-@RequestMapping("/bus")
-public class BusController {
 
+@RestController
+public class RutaController {
     Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private BusService busService;
+    private RutaService rutaService;
 
     @GetMapping("/list")
-    public List<Bus> listarBuses() {
-        List<Bus> buses = busService.listarbuses();
+    public List<Ruta> listarRutas() {
+        List<Ruta> rutas = rutaService.listarrutas();
         //ModelAndView modelAndView = new ModelAndView("bus-list");
         //modelAndView.addObject("buses", buses);
-        return buses;
+        return rutas;
     }
 
     @GetMapping("/view/{id}")
-    public BusDTO verBus(@PathVariable("id") Long id) {
-        BusDTO bus = busService.recuperarBus(id);
+    public RutaDTO verBus(@PathVariable("id") Long id) {
+        RutaDTO ruta = rutaService.recuperarRuta(id);
         ModelAndView modelAndView = new ModelAndView("bus-view");
-        modelAndView.addObject("bus", bus);
-        return bus;
+        modelAndView.addObject("ruta", ruta);
+        return ruta;
+    
     }
-
 }

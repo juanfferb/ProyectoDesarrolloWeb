@@ -3,6 +3,8 @@ package org.example.persistencia.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,9 +39,11 @@ public class Bus {
         joinColumns = @JoinColumn(name = "bus_id"),
         inverseJoinColumns = @JoinColumn(name = "conductor_id")
     )
+    @JsonIgnore
     private List<Conductor> conductores = new ArrayList<>(); 
 
     @OneToMany(mappedBy = "bus")
+    @JsonIgnore
     private List<Asignacion> asignaciones = new ArrayList<>();
 
     public Bus() {
