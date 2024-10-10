@@ -3,6 +3,7 @@ package org.example.persistencia.controller;
 import java.util.List;
 
 import org.example.persistencia.dto.ConductorDTO;
+import org.example.persistencia.model.Conductor;
 import org.example.persistencia.service.ConductorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,7 @@ public class ConductorController {
 
     @GetMapping("/list")
     public List<ConductorDTO> listarConductores() {
-        return conductorService.listarConductores();
+        return conductorService.listarconductores();
     }
 
     @GetMapping("/view/{id}")
@@ -30,8 +31,8 @@ public class ConductorController {
     }
 
     @PostMapping("/save")
-    public void guardarConductor(@Valid @RequestBody ConductorDTO conductorDTO) {
-        conductorService.guardarConductor(conductorDTO);
+    public void guardarConductor(@Valid @RequestBody Conductor conductor) {
+        conductorService.guardarConductor(conductor);
     }
 
     @PostMapping("/create")
@@ -48,7 +49,7 @@ public class ConductorController {
     public List<ConductorDTO> buscarConductores(@RequestParam(required = false) String searchText) {
         if (searchText == null || searchText.trim().isEmpty()) {
             log.info("No hay texto de búsqueda. Retornando todos los conductores");
-            return conductorService.listarConductores();
+            return conductorService.listarconductores();
         } else {
             log.info("Buscando conductores cuyo nombre contiene {}", searchText);
             return conductorService.buscarPorNombre(searchText);

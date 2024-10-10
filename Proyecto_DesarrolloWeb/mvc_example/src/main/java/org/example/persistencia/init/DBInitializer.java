@@ -68,19 +68,18 @@ public class DBInitializer implements CommandLineRunner {
         List<Bus> buses = Arrays.asList(bus1, bus2, bus3, bus4, bus5, bus6, bus7, bus8, bus9, bus10, bus11, bus12, bus13);
         busRepository.saveAll(buses);
 
-        Ruta ruta1 = new Ruta("Ruta Norte");
-        Ruta ruta2 = new Ruta("Ruta Sur");
-        Ruta ruta3 = new Ruta("Ruta Calle 80 - Portal Norte");
-        Ruta ruta4 = new Ruta("Ruta Av. Caracas - Héroes");
-        Ruta ruta5 = new Ruta("Ruta Suba - Rincón");
-        Ruta ruta6 = new Ruta("Ruta Tunal - Portal Sur");
-        Ruta ruta7 = new Ruta("Ruta Bosa - Centro");
-        Ruta ruta8 = new Ruta("Ruta Kennedy - Tintal");
-        Ruta ruta9 = new Ruta("Ruta Engativá - Normandía");
-        Ruta ruta10 = new Ruta("Ruta San Cristóbal - Usaquén");
-        Ruta ruta11 = new Ruta("Ruta Ciudad Bolívar - Portal Américas");
-        Ruta ruta12 = new Ruta("Ruta Chapinero - Teusaquillo");
-
+        Ruta ruta1 = new Ruta("Ruta Norte", "Estacion Norte", "7:00 am -9:00 pm");
+        Ruta ruta2 = new Ruta("Ruta Sur", "Estacion Sur", "7:00 am -10:00 pm");
+        Ruta ruta3 = new Ruta("Ruta Calle 80 - Portal Norte", "Estacion SantaFe", "7:00 am -9:00 pm");
+        Ruta ruta4 = new Ruta("Ruta Av. Caracas - Héroes", "Estacion Heroes", "7:00 am -10:00 pm");
+        Ruta ruta5 = new Ruta("Ruta Suba - Rincón", "Estacion Florez", "7:00 am -9:00 pm");
+        Ruta ruta6 = new Ruta("Ruta Tunal - Portal Sur", "Estacion Parque Tunal", "8:00 am -10:00 pm");
+        Ruta ruta7 = new Ruta("Ruta Bosa - Centro", "Estacion Bosa", "7:00 am -9:00 pm");
+        Ruta ruta8 = new Ruta("Ruta Kennedy - Tintal", "Estacion Banderas", "8:00 am -9:00 pm");
+        Ruta ruta9 = new Ruta("Ruta Engativá - Normandía", "Estacion Exito", "7:00 am -9:00 pm");
+        Ruta ruta10 = new Ruta("Ruta San Cristóbal - Usaquén", "Estacion parque 93", "8:00 am -9:00 pm");
+        Ruta ruta11 = new Ruta("Ruta Ciudad Bolívar - Portal Américas", "Estacion Loma", "7:00 am -9:00 pm");
+        Ruta ruta12 = new Ruta("Ruta Chapinero - Teusaquillo", "Estacion Thea", "7:00 am -10:00 pm");
         List<Ruta> rutas = Arrays.asList(ruta1, ruta2, ruta3, ruta4, ruta5, ruta6, ruta7, ruta8, ruta9, ruta10, ruta11, ruta12);
         rutaRepository.saveAll(rutas);
 

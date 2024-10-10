@@ -21,8 +21,9 @@ public class ConductorService {
     private ConductorDTOConverter conductorDTOConverter;
 
 
-    public List<Conductor> listarconductores() {
-        return conductorRepository.findAll();
+    public List<ConductorDTO> listarconductores() {
+        List<Conductor> conductores = conductorRepository.findAll();
+        return conductorDTOConverter.entityToDTO(conductores); 
     }
 
     public ConductorDTO recuperarConductor(Long id) {
@@ -33,7 +34,7 @@ public class ConductorService {
         conductorRepository.save(conductor);
     }
 
-    public List<Conductor> buscarPorNombre(String textoBusqueda) {
+    public List<ConductorDTO> buscarPorNombre(String textoBusqueda) {
         return conductorRepository.findAllByNombreStartingWith(textoBusqueda);
     }
 

@@ -15,4 +15,12 @@ public interface AsignacionRepository extends JpaRepository<Asignacion, Long> {
     @Query("SELECT a FROM Asignacion a WHERE a.conductor.id = :conductorId")
     List<Asignacion> findAsignacionesByConductorId(@Param("conductorId") Long conductorId);
 
+    // Método para encontrar asignaciones por ID de conductor
+    @Query("SELECT a FROM Asignacion a WHERE a.bus.id = :busId")
+    List<Asignacion> findAsignacionesByBusId(@Param("busId") Long busId);
+
+    // Método para encontrar asignaciones por ID de conductor
+    @Query("SELECT a FROM Asignacion a WHERE a.ruta.id = :rutaId")
+    List<Asignacion> findAsignacionesByRutaId(@Param("rutaId") Long rutaId);
+
 }

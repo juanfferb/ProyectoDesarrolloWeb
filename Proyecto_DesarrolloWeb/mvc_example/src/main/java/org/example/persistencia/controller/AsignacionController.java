@@ -1,5 +1,7 @@
 package org.example.persistencia.controller;
 
+import org.example.persistencia.dto.BusDTO;
+import org.example.persistencia.dto.RutaDTO;
 import org.example.persistencia.model.Asignacion;
 import org.example.persistencia.model.Bus;
 import org.example.persistencia.model.Conductor;
@@ -53,9 +55,9 @@ public class AsignacionController {
 
          // Obtener listas de buses y rutas
 
-         List<Bus> buses = busService.listarbuses();  // Asume que tienes un servicio para obtener buses
+         List<BusDTO> buses = busService.listarBuses();  // Asume que tienes un servicio para obtener buses
 
-         List<Ruta> rutas = rutaService.listarrutas(); // Asume que tienes un servicio para obtener rutas
+         List<RutaDTO> rutas = rutaService.listarRutas(); // Asume que tienes un servicio para obtener rutas
 
          mav.addObject("asignacion", asignacion);
 
@@ -75,9 +77,9 @@ public class AsignacionController {
 
              // Obtener listas de buses y rutas nuevamente en caso de error
 
-             List<Bus> buses = busService.listarbuses();
+             List<BusDTO> buses = busService.listarBuses();
 
-             List<Ruta> rutas = rutaService.listarrutas();
+             List<RutaDTO> rutas = rutaService.listarRutas();
 
              ModelAndView mav = new ModelAndView("asignacion-create");
 

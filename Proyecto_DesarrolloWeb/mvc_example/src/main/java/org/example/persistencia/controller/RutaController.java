@@ -2,8 +2,8 @@ package org.example.persistencia.controller;
 
 import java.util.List;
 
+import org.example.persistencia.dto.RutaDTO;
 import org.example.persistencia.model.Ruta;
-import org.example.persistencia.dto.RutaDTO;
 import org.example.persistencia.service.RutaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,43 +11,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
-
-/*
-import org.example.persistence.model.Ruta;
-import org.example.persistencia.dto.RutaDTO;
-import org.example.persistencia.service.RutaService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import jakarta.validation.Valid;
-*/
-
 
 @RestController
+@RequestMapping("/Ruta")
 public class RutaController {
     Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private RutaService rutaService;
+    private RutaService RutaService;
 
     @GetMapping("/list")
-    public List<Ruta> listarRutas() {
-        List<Ruta> rutas = rutaService.listarrutas();
-        return rutas;
+    public List<RutaDTO> listarRutaes() {
+        return RutaService.listarRutas();
     }
 
     @GetMapping("/view/{id}")
     public RutaDTO verRuta(@PathVariable("id") Long id) {
-        RutaDTO ruta = rutaService.recuperarRuta(id);
-        return ruta;
-    
+        return RutaService.recuperarRuta(id);
     }
 
     @PostMapping("/save")
-    public void guardarRuta(@Valid @RequestBody RutaDTO RutaDTO) {
-        RutaService.guardarRuta(RutaDTO);
+    public void guardarRuta(@Valid @RequestBody Ruta Ruta) {
+        RutaService.guardarRuta(Ruta);
     }
 
     @PostMapping("/create")
@@ -67,7 +52,7 @@ public class RutaController {
             return RutaService.listarRutas();
         } else {
             log.info("Rutacando Rutaes cuyo nombre contiene {}", searchText);
-            return RutaService.buscarPorNombre(searchText);
+            return RutaService.buscarPorCodigo(searchText);
         }
     }
 }
