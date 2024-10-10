@@ -2,6 +2,7 @@ package org.example.persistencia.controller;
 
 import java.util.List;
 
+import org.example.persistencia.model.Ruta;
 import org.example.persistencia.dto.RutaDTO;
 import org.example.persistencia.service.RutaService;
 import org.slf4j.Logger;
@@ -11,6 +12,17 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 
+/*
+import org.example.persistence.model.Ruta;
+import org.example.persistencia.dto.RutaDTO;
+import org.example.persistencia.service.RutaService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import jakarta.validation.Valid;
+*/
 
 
 @RestController

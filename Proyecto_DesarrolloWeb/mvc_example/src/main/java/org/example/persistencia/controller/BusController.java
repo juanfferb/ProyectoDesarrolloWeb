@@ -2,6 +2,7 @@ package org.example.persistencia.controller;
 
 import java.util.List;
 
+import org.example.persistencia.model.Bus;
 import org.example.persistencia.dto.BusDTO;
 import org.example.persistencia.service.BusService;
 import org.slf4j.Logger;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
-
 
 @RestController
 @RequestMapping("/bus")

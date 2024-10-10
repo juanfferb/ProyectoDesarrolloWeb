@@ -7,6 +7,7 @@ import { ConductorListComponent } from './conductor/conductor-list/conductor-lis
 import { ConductorSearchComponent } from './conductor/conductor-search/conductor-search.component';
 import { ConductorViewComponent } from './conductor/conductor-view/conductor-view.component';
 import { RutaComponent } from './ruta/ruta.component';
+import { BusComponent } from './bus/bus.component';
 
 export const routes: Routes = [
     { path: 'asignacion/asignacion-create', component: AsignacionCreateComponent },
@@ -17,6 +18,7 @@ export const routes: Routes = [
     { path: 'conductor/conductor-search', component: ConductorSearchComponent },
     { path: 'conductor/view/:id', component: ConductorViewComponent },  // Incluye el ID para ver detalles del conductor
     { path: 'ruta', component: RutaComponent },
+    { path: 'bus', component: BusComponent},
     { path: '', pathMatch: 'full', redirectTo: 'conductor/conductor-list' },
 ];
 

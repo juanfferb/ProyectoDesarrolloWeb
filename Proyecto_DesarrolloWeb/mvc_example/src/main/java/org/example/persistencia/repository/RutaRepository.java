@@ -19,9 +19,9 @@ public interface RutaRepository extends JpaRepository<Ruta, Long> {
     List<Ruta> findAllByNombreStartingWithIgnoreCase(String text);
 
     // https://www.baeldung.com/spring-data-jpa-query
-    @Query("SELECT c FROM Conductor c WHERE c.nombre LIKE concat(:text, '%')")
+    @Query("SELECT c FROM Ruta c WHERE c.nombre LIKE concat(:text, '%')")
     List<Ruta> findPersonsByNameStartingWith(@Param("text") String text);
 
-    @Query("SELECT c FROM Conductor c WHERE LOWER(c.nombre) LIKE LOWER(concat(:text,'%'))")
+    @Query("SELECT c FROM Ruta c WHERE LOWER(c.nombre) LIKE LOWER(concat(:text,'%'))")
     List<Ruta> findPersonsByNameStartingWithCaseInsensitive(@Param("text") String text);
 }

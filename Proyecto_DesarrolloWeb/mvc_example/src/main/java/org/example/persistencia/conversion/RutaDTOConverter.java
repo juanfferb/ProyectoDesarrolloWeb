@@ -9,6 +9,6 @@ public class RutaDTOConverter {
     }
  
     public Ruta DTOToEntity(RutaDTO Ruta) {
-        return new Ruta(Ruta.getCodigo(), Ruta.getEstaciones(), Ruta.getHorario(), Ruta.getAsignaciones());
+        return new Ruta(Ruta.getCodigo(), Ruta.getEstaciones(), Ruta.getHorario());
     }
 }

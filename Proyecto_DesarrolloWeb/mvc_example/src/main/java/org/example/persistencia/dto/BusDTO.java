@@ -1,5 +1,10 @@
 package org.example.persistencia.dto;
 
+import java.util.List;
+import org.example.persistencia.model.Ruta;
+import org.example.persistencia.model.Conductor;
+import org.example.persistencia.model.Asignacion;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -17,6 +22,7 @@ public class BusDTO {
     private Long id;
     private String placa;
     private String modelo;
-    private List<Ruta> rutasAsignadas;
+    private List<Conductor> conductores;
+    private List<Asignacion> asignaciones;
 
 }
