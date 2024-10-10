@@ -42,10 +42,17 @@ public class ConductorService {
         List<Conductor> conductores = conductorRepository.findPersonsByNameStartingWith(textoBusqueda);
         return conductorDTOConverter.entityToDTO(conductores);
     }
-    
-    
-    
 
+    public ConductorDTO actualizarConductor(Long id, ConductorDTO conductorDTO) {
+        Conductor conductor = conductorRepository.findById(id).orElseThrow(() -> new RuntimeException("Conductor no encontrado"));
+        conductor.setNombre(conductorDTO.getNombre());
+        conductor.setCedula(conductorDTO.getCedula());
+        conductor.setTelefono(conductorDTO.getTelefono());
+        conductor.setDireccion(conductorDTO.getDireccion());
+        conductorRepository.save(conductor);
+        return conductorDTOConverter.entityToDTO(conductor);
+    }    
+    
     // Nuevo método para crear un conductor
     public ConductorDTO crearConductor(ConductorDTO conductorDTO) {
         Conductor conductor = conductorDTOConverter.DTOToEntity(conductorDTO);

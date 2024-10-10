@@ -2,7 +2,9 @@ package org.example.persistencia.controller;
 
 import java.util.List;
 
+import org.example.persistencia.conversion.BusDTOConverter;
 import org.example.persistencia.dto.BusDTO;
+import org.example.persistencia.dto.ConductorDTO;
 import org.example.persistencia.model.Bus;
 import org.example.persistencia.service.BusService;
 import org.slf4j.Logger;
@@ -38,6 +40,11 @@ public class BusController {
     @PostMapping("/create")
     public void crearBus(@Valid @RequestBody BusDTO BusDTO) {
         BusService.crearBus(BusDTO);
+    }
+
+    @PutMapping("/update/{id}")
+    public BusDTO actualizarBus(@PathVariable Long id, @Valid @RequestBody BusDTO busDTO) {
+    return BusService.actualizarBus(id, busDTO);
     }
 
     @DeleteMapping("/delete/{id}")

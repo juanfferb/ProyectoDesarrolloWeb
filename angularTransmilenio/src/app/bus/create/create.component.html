@@ -1,1 +1,29 @@
-<p>create works!</p>
+<p>Bus-create works!</p>
+<div class="BarraNavegacion">
+    <ul>
+        <li><img src="https://julicastiblanco.wordpress.com/wp-content/uploads/2017/02/wordpress-biarticulado-01.png?w=1000" height="60px" alt="Logo"></li>
+        <li><a [routerLink]="['/Bus/Conductor-list']">Coordinador</a></li>
+        <li><a [routerLink]="['/ruta']">Rutas</a></li>
+        <li><p>Buses</p></li>
+    </ul>
+</div>
+
+<div class="formcontainer">
+    <h1 class="tituloBuses">Crear Bus</h1>
+    <form (ngSubmit)="createBus()">
+        <div class="form-group">
+            <label for="modelo">Modelo:</label>
+            <input type="text" id="modelo" [(ngModel)]="newBus.modelo" name="modelo" required />
+            <br />
+        </div>
+        <div class="form-group">
+            <label for="placa">Placa:</label>
+            <input type="text" id="placa" [(ngModel)]="newBus.placa" name="placa" required />
+            <br />
+        </div>
+        <div class="button-container">
+            <button type="submit" class="botonRojo">Guardar</button>
+            <a class="cancel-button" [routerLink]="['/bus/list']">Cancelar</a>
+        </div>
+    </form>
+</div>

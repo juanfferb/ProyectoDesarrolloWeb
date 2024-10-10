@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.example.persistencia.conversion.BusDTOConverter;
 import org.example.persistencia.dto.BusDTO;
+import org.example.persistencia.dto.ConductorDTO;
 import org.example.persistencia.model.Asignacion;
 import org.example.persistencia.model.Bus;
+import org.example.persistencia.model.Conductor;
 import org.example.persistencia.repository.BusRepository;
 import org.example.persistencia.repository.AsignacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,15 +46,23 @@ public class BusService {
         return BusDTOConverter.entityToDTO(BusRepository.save(Bus));
     }
 
+    public BusDTO actualizarBus(Long id, BusDTO busDTO) {
+        Bus bus = BusRepository.findById(id).orElseThrow(() -> new RuntimeException("Bus no encontrado"));
+        bus.setModelo(busDTO.getModelo());
+        bus.setPlaca(busDTO.getPlaca());
+        BusRepository.save(bus);
+        return BusDTOConverter.entityToDTO(bus);
+    }   
+
     public void eliminarBus(Long id) {
-        // Primero eliminamos las asignaciones asociadas al Bus
+        // Primero eliminamos las asignaciones asociadas al conductor
         List<Asignacion> asignaciones = asignacionRepository.findAsignacionesByBusId(id);
         for (Asignacion asignacion : asignaciones) {
             asignacionRepository.delete(asignacion);
         }
-
-        // Luego eliminamos el Bus
-        BusDTO BusDTO = recuperarBus(id);
-        //BusRepository.delete(BusDTO);
+    
+        // Luego eliminamos el conductor
+        Bus bus = BusRepository.findById(id).orElseThrow();
+        BusRepository.delete(bus);  // Este código estaba comentado
     }
 }

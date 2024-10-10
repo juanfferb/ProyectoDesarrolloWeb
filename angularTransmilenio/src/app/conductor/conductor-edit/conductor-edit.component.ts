@@ -41,14 +41,15 @@ export class ConductorEditComponent {
   }
 
   updateConductor(): void {
-    this.conductorService.crearConductora(this.updatedConductor).subscribe(
-      response => {
-        this.router.navigate(['/conductores']); // Redirigir después de editar
+    this.conductorService.actualizarConductora(this.updatedConductor).subscribe({
+      next: (response) => {
+        this.router.navigate(['/conductor/conductor-list']); // Redirigir después de editar
       },
-      error => {
+      error: (error) => {
         console.error('Error al actualizar el conductor', error);
         this.errorMessage = 'Error al actualizar el conductor';
       }
-    );
+    });
   }
+  
 }

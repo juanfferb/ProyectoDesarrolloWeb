@@ -9,6 +9,8 @@ import { ConductorViewComponent } from './conductor/conductor-view/conductor-vie
 import { RutaComponent } from './ruta/ruta.component';
 import { BusComponent } from './bus/bus.component';
 import { BusListComponent } from './bus/list/list.component';
+import { BusCreateComponent } from './bus/create/create.component';
+import { BusViewComponent } from './bus/view/view.component';
 
 export const routes: Routes = [
     { path: 'asignacion/asignacion-create', component: AsignacionCreateComponent },
@@ -19,6 +21,9 @@ export const routes: Routes = [
     { path: 'conductor/conductor-search', component: ConductorSearchComponent },
     { path: 'conductor/view/:id', component: ConductorViewComponent },
     { path: 'bus/list', component: BusListComponent },
+    { path: 'bus/create', component: BusCreateComponent },
+    { path: 'bus/view/:id', component: BusViewComponent },
+    //{ path: 'bus/edit', component: BusEditComponent },
     { path: 'ruta', component: RutaComponent },
     { path: 'bus', component: BusComponent},
     { path: '', pathMatch: 'full', redirectTo: 'conductor/conductor-list' },

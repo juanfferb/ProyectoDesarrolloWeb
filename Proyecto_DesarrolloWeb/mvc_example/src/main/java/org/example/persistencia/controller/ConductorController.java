@@ -30,6 +30,11 @@ public class ConductorController {
         return conductorService.recuperarConductor(id);
     }
 
+    @PutMapping("/update/{id}")
+    public ConductorDTO actualizarConductor(@PathVariable Long id, @Valid @RequestBody ConductorDTO conductorDTO) {
+    return conductorService.actualizarConductor(id, conductorDTO);
+    }
+
     @PostMapping("/save")
     public void guardarConductor(@Valid @RequestBody Conductor conductor) {
         conductorService.guardarConductor(conductor);

@@ -35,6 +35,10 @@ export class ConductorService {
     );
   }
 
+  actualizarConductora(conductor: ConductorDTO): Observable<ConductorDTO> {
+    return this.http.put<ConductorDTO>(`${environment.SERVER_URL}/conductor/update/${conductor.id}`, conductor)
+  }
+
   // Método para buscar conductores por nombre
   buscarConductoresPorNombre(textoBusqueda: string): Observable<ConductorDTO[]> {
     return this.http.get<ConductorDTO[]>(`${environment.SERVER_URL}/conductor/search?nombre=${textoBusqueda}`);

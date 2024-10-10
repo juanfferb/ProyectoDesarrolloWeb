@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-edit',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './edit.component.html',
-  styleUrl: './edit.component.css'
+  styleUrls: [ './edit.component.css'] 
 })
 export class EditComponent {
 
