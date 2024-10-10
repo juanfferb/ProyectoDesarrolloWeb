@@ -34,9 +34,17 @@ public class ConductorService {
         conductorRepository.save(conductor);
     }
 
-    public List<ConductorDTO> buscarPorNombre(String textoBusqueda) {
+    /*public List<ConductorDTO> buscarPorNombre(String textoBusqueda) {
         return conductorRepository.findAllByNombreStartingWith(textoBusqueda);
+    }*/
+
+    public List<ConductorDTO> buscarPorNombre(String textoBusqueda) {
+        List<Conductor> conductores = conductorRepository.findPersonsByNameStartingWith(textoBusqueda);
+        return conductorDTOConverter.entityToDTO(conductores);
     }
+    
+    
+    
 
     // Nuevo método para crear un conductor
     public ConductorDTO crearConductor(ConductorDTO conductorDTO) {

@@ -46,13 +46,14 @@ public class ConductorController {
     }
 
     @GetMapping("/search")
-    public List<ConductorDTO> buscarConductores(@RequestParam(required = false) String searchText) {
-        if (searchText == null || searchText.trim().isEmpty()) {
+    public List<ConductorDTO> buscarConductores(@RequestParam(required = false) String nombre) {
+        System.out.println(nombre);
+        if (nombre == null || nombre.trim().isEmpty()) {
             log.info("No hay texto de búsqueda. Retornando todos los conductores");
             return conductorService.listarconductores();
         } else {
-            log.info("Buscando conductores cuyo nombre contiene {}", searchText);
-            return conductorService.buscarPorNombre(searchText);
+            log.info("Buscando conductores cuyo nombre contiene {}", nombre);
+            return conductorService.buscarPorNombre(nombre);
         }
     }
 }
