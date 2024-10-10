@@ -19,15 +19,13 @@
         </tr>
     </thead>
     <tbody>
-        <tr th:each="asignacion : ${asignaciones}">
-            <td th:text="${asignacion.id}"></td>
-            <td th:text="${asignacion.bus.modelo}"></td>
-            <td th:text="${asignacion.ruta.nombre}"></td>
-            <td th:text="${asignacion.diasAsignacion}"></td>
+        <tr *ngFor="let asignacion of (asignaciones$ | async)">
+            <td>{{ asignacion.id }}</td>
+            <td>{{ asignacion.bus.modelo }}</td>
+            <td>{{ asignacion.ruta.codigo }}</td>
+            <td>{{ asignacion.diaAsignacion }}</td>
             <td>
-                <form th:action="@{/asignacion/delete/{id}(id=${asignacion.id})}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta asignación?');">
-                    <button type="submit" class="botonRojo">Eliminar</button>
-                </form>
+                <button (click)="eliminarAsignacion(asignacion.id!)" class="botonRojo">Eliminar</button>
             </td>                
         </tr>
     </tbody>
@@ -35,5 +33,5 @@
 
 <div class="button-container1">
     <a class="volver-button" [routerLink]="['/conductor/conductor-list']">Volver</a>
-    <a class="botonRojoBuscar" th:href="@{/asignacion/create}">Agregar</a>
+    <a class="botonRojoBuscar" [routerLink]="['/asignacion/create']">Agregar</a>
 </div>

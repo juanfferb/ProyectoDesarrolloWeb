@@ -8,6 +8,7 @@ import { ConductorSearchComponent } from './conductor/conductor-search/conductor
 import { ConductorViewComponent } from './conductor/conductor-view/conductor-view.component';
 import { RutaComponent } from './ruta/ruta.component';
 import { BusComponent } from './bus/bus.component';
+import { BusListComponent } from './bus/list/list.component';
 
 export const routes: Routes = [
     { path: 'asignacion/asignacion-create', component: AsignacionCreateComponent },
@@ -17,6 +18,7 @@ export const routes: Routes = [
     { path: 'conductor/conductor-list', component: ConductorListComponent },
     { path: 'conductor/conductor-search', component: ConductorSearchComponent },
     { path: 'conductor/view/:id', component: ConductorViewComponent },
+    { path: 'bus/list', component: BusListComponent },
     { path: 'ruta', component: RutaComponent },
     { path: 'bus', component: BusComponent},
     { path: '', pathMatch: 'full', redirectTo: 'conductor/conductor-list' },

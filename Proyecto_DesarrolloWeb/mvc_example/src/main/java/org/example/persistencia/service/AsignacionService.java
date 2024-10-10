@@ -1,12 +1,14 @@
 package org.example.persistencia.service;
 
+import org.example.persistencia.conversion.AsignacionDTOConverter;
+import org.example.persistencia.dto.AsignacionDTO;
 import org.example.persistencia.model.Asignacion;
-import org.example.persistencia.model.Conductor;
 import org.example.persistencia.repository.AsignacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AsignacionService {
@@ -14,21 +16,28 @@ public class AsignacionService {
     @Autowired
     private AsignacionRepository asignacionRepository;
 
-    public List<Asignacion> getAsignacionesByConductorId(Long conductorId) {
-        return asignacionRepository.findAsignacionesByConductorId(conductorId);
+    @Autowired
+    private AsignacionDTOConverter asignacionDTOConverter;
+
+    public List<AsignacionDTO> getAsignacionesByConductorId(Long conductorId) {
+        List<Asignacion> asignaciones = asignacionRepository.findAsignacionesByConductorId(conductorId);
+        return asignaciones.stream()
+                           .map(asignacionDTOConverter::entityToDTO)
+                           .collect(Collectors.toList());
     }
 
-    public Asignacion crearAsignacion(Asignacion asignacion) {
-        return asignacionRepository.save(asignacion);
+    public AsignacionDTO crearAsignacion(AsignacionDTO asignacionDTO) {
+        Asignacion asignacion = asignacionDTOConverter.DTOToEntity(asignacionDTO);
+        return asignacionDTOConverter.entityToDTO(asignacionRepository.save(asignacion));
     }
 
-    public boolean existeConflictoDias(Asignacion asignacion) {
+    public boolean existeConflictoDias(AsignacionDTO asignacionDTO) {
         // Implementar la lógica para verificar si los días de la nueva asignación
         // se cruzan con otra asignación para el mismo conductor
         return false; // Ejemplo, implementar la lógica real
     }
-    
-    public boolean existeConflictoBus(Asignacion asignacion) {
+
+    public boolean existeConflictoBus(AsignacionDTO asignacionDTO) {
         // Implementar la lógica para verificar si el bus ya está asignado en los mismos días
         return false; // Ejemplo, implementar la lógica real
     }
@@ -39,9 +48,9 @@ public class AsignacionService {
         asignacionRepository.delete(asignacion);
     }
 
-    public Asignacion getAsignacionById(Long id) {
-    return asignacionRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("Asignación no encontrada con ID: " + id));
-}
-    
+    public AsignacionDTO getAsignacionById(Long id) {
+        Asignacion asignacion = asignacionRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Asignación no encontrada con ID: " + id));
+        return asignacionDTOConverter.entityToDTO(asignacion);
+    }
 }

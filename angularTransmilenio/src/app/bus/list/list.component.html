@@ -1,1 +1,44 @@
-<p>list works!</p>
+<img class="buses1" src="https://www.transmilenio.gov.co/publicaciones/151446/transmilenio-avanza-en-la-renovacion-del-sistema-con-846-buses-nuevos/info/transmilenio/media/pubInt151446.jpg" alt="Rutas">
+
+<p class="Texto1">
+    Como administrador tiene la opción de visualizar los buses existentes que pueden tener los conductores, 
+    lo que facilita la asignación de buses a los conductores.
+</p>
+
+<table class="entity-list">
+    <thead>
+        <tr>
+            <th>Placa</th>
+            <th>Modelo</th>
+            <th>Editar</th>
+            <th>Ver</th>
+            <th>Eliminar</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let c of allBuses$ | async">
+            <tr *ngIf="c.placa">
+                <td>{{ c.placa }}</td>
+                <td>{{ c.modelo }}</td>
+                <td>
+                    <a class="botonRojo" [routerLink]="['/bus/edit', c.id]">Editar</a>
+                </td>
+                <td>
+                    <a class="botonRojo" [routerLink]="['/bus/view', c.id]">Ver</a>
+                </td>
+                <td>
+                    <button class="botonRojo" (click)="deleteBus(c.id!)">Eliminar</button>
+                </td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>
+
+<img class="buses2" src="https://www.transmilenio.gov.co/publicaciones/151507/estaciones-de-transmilenio-habilitadas-para-el-22-de-noviembre/info/transmilenio/media/pubInt151507.jpg" alt="Conductores2">
+
+<p class="Texto2">
+    Adicionalemnte puede crear nuevos buses según sea necesario, 
+    asegurando así una mejor coordinación y facilidad en la asignación de buses a los conductores.
+</p>
+
+<a class="botonRojoBuscar" [routerLink]="['/bus/bus-create']">Agregar Bus</a>

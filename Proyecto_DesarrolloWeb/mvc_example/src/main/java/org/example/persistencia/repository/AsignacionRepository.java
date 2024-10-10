@@ -1,6 +1,7 @@
 package org.example.persistencia.repository;
 
 import org.example.persistencia.model.Asignacion;
+import org.example.persistencia.dto.AsignacionDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" th:href="@{/css/styleProject.css}">
+</head>
+
+<body>
+    <div class="BarraNavegacion">
+        <ul>
+            <li><img src="https://julicastiblanco.wordpress.com/wp-content/uploads/2017/02/wordpress-biarticulado-01.png?w=1000" height="60px" alt="Logo"></li>
+            <li><a th:href="@{/conductor/list}">Coordinador</a></li>
+            <li><p>Rutas</p></li>
+            <li><p>Buses</p></li>
+        </ul>
+    </div>
+    <div th:insert="~{fragments/menus.html :: menuPrincipal}"></div>
+
+    <h1 class="tituloConductores">Conductores</h1>
+    <img class="conductores1" src="https://bogota.gov.co/sites/default/files/2020-02/166.jpg" alt="Conductores">
+    <p class="Texto1">Como coordinador, para buscar un conductor específico por su nombre, simplemente presione el botón "Buscar". 
+        Esta funcionalidad le permitirá acceder de manera rápida y eficiente a la información detallada del conductor que está buscando. 
+        Al ingresar el nombre en el campo de búsqueda, obtendrás una lista filtrada de resultados que coincide con el nombre ingresado. 
+        Al seleccionar el conductor deseado, podrá ver todos los datos relevantes como su información personal y también editarlos.
+        Esta herramienta está diseñada para facilitar la localización de conductores en la base de datos, 
+        asegurando que pueda acceder a la información precisa de manera ágil y sin complicaciones.
+    </p>
+    <img class="conductores2" src="https://caracol.com.co/resizer/v2/QBE5JQQJPBH2LCU5B22YN7MBPU.png?auth=8a6ea4cb42db8b0ca359aebe31c6071d9abe0b8c21ad2a178a83dfcfd2365a00&width=650&height=488&quality=70&smart=true" alt="Conductores2">
+    <a class="botonRojoBuscar" th:href="@{/conductor/search}">Buscar Conductor</a>
+
+    <p class="Texto1">Adicionalemnte puede crear un conductor nuevo con toda su infomación correspondiente</p>
+
+    <a class="botonRojoBuscar" th:href="@{/conductor/create}">Agregar Conductor</a>
+
+    <p class="Texto2"> También como coordinador, puede evidenciar la información detallada de los conductores de 
+        Transmilenio, a través de un listado completo que permite visualizar 
+        todos los datos relevantes de cada conductor. Esta tabla ofrece la funcionalidad de editar 
+        y actualizar la información de los conductores, asegurando que los 
+        datos estén siempre actualizados. Además, tendrás la posibilidad de ver las asignaciones actuales 
+        de cada conductor, incluyendo las rutas y horarios que tienen asignados. Esta herramienta está 
+        diseñada para facilitar la gestión eficiente del personal, garantizando que la operación diaria del 
+        sistema Transmilenio se realice de manera ordenada y precisa.</p>
+
+    <table class="entity-list">
+        <thead>
+            <tr>
+                <th>Placa</th>
+                <th>Modelo</th>
+                <th>Ver</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr th:each="c : ${buses}" th:if="${c.nombre}">
+                <td th:text="${c.placa}"></td>
+                <td th:text="${c.modelo}"></td>
+                <td>
+                    <a class="botonRojo" th:href="@{/asignacion/view/{id}(id=${c.id})}">Ver</a>
+                </td>
+                <td>
+                    <a class="botonRojo" th:href="@{/bus/view/{id}(id=${c.id})}">Ver</a>
+                </td>
+                <td>
+                    <a class="botonRojo" th:href="@{/bus/edit-form/{id}(id=${c.id})}">Editar</a>
+                </td>
+                <td>
+                    <form action="#" th:action="@{/bus/delete/{id}(id=${c.id})}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este conductor?');">
+                        <input type="hidden" name="_method" value="delete"/>
+                        <button type="submit" class="botonRojo">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+</body>
+
+</html>

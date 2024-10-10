@@ -18,18 +18,19 @@ export class BusService {
 
   // Método para listar todos los Buses
   listarBuses(): Observable<BusDTO[]> {
-    return this.http.get<BusDTO[]>(`${environment.SERVER_URL}/bus/list`);
+    console.log("buses...")
+    return this.http.get<BusDTO[]>(`${environment.SERVER_URL}/Bus/list`);
   }
 
   // Método para recuperar un Bus por ID
   buscarBusPorId(id: number): Observable<BusDTO> {
-    return this.http.get<BusDTO>(`${environment.SERVER_URL}/bus/view/${id}`);
+    return this.http.get<BusDTO>(`${environment.SERVER_URL}/Bus/view/${id}`);
   }
 
   // Método para crear un nuevo Bus
   crearBus(BusDTO: BusDTO): Observable<BusDTO> {
     return this.http.post<BusDTO>(
-      `${environment.SERVER_URL}/bus/create`,
+      `${environment.SERVER_URL}/Bus/create`,
       BusDTO,
       this.httpOptions
     );
@@ -37,11 +38,11 @@ export class BusService {
 
   // Método para buscar Buses por nombre
   buscarBusPorNombre(textoBusqueda: string): Observable<BusDTO[]> {
-    return this.http.get<BusDTO[]>(`${environment.SERVER_URL}/bus/search?nombre=${textoBusqueda}`);
+    return this.http.get<BusDTO[]>(`${environment.SERVER_URL}/Bus/search?nombre=${textoBusqueda}`);
   }
 
   // Método para eliminar un Bus por ID
   eliminarBus(id: number): Observable<void> {
-    return this.http.delete<void>(`${environment.SERVER_URL}/bus/delete/${id}`);
+    return this.http.delete<void>(`${environment.SERVER_URL}/Bus/delete/${id}`);
   }
 }

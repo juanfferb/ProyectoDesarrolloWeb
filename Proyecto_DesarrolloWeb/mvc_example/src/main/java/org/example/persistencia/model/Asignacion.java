@@ -1,5 +1,7 @@
 package org.example.persistencia.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,6 +20,7 @@ public class Asignacion {
     private Long id;
 
     @ManyToOne
+    @JsonIgnore
     @NotNull(message = "El conductor no puede ser nulo")
     private Conductor conductor;
 
@@ -26,6 +29,7 @@ public class Asignacion {
     private Bus bus;
 
     @ManyToOne
+    @JsonIgnore
     @NotNull(message = "La ruta no puede ser nula")
     private Ruta ruta;
 
