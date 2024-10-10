@@ -37,17 +37,16 @@ export class ConductorListComponent {
 
   deleteConductor(id: number): void {
     if (confirm('¿Estás seguro de que quieres eliminar este conductor?')) {
-        this.ConductorService.eliminarConductor(id).subscribe(
-            response => {
-                // Manejar la respuesta, por ejemplo, refrescando la lista de conductores
-                this.ngOnInit();
+        this.ConductorService.eliminarConductor(id).subscribe({
+            next: () => {
+                this.ngOnInit(); // Refrescar la lista
             },
-            error => {
+            error: (error) => {
                 console.error('Error al eliminar el conductor', error);
                 this.errorMessage = 'Error al eliminar el conductor';
             }
-        );
+        });
     }
-}
+  }
 
 }

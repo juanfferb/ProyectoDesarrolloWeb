@@ -50,9 +50,10 @@ public class ConductorService {
         for (Asignacion asignacion : asignaciones) {
             asignacionRepository.delete(asignacion);
         }
-
+    
         // Luego eliminamos el conductor
-        ConductorDTO conductorDTO = recuperarConductor(id);
-        //conductorRepository.delete(conductorDTO);
+        Conductor conductor = conductorRepository.findById(id).orElseThrow();
+        conductorRepository.delete(conductor);  // Este código estaba comentado
     }
+    
 }
