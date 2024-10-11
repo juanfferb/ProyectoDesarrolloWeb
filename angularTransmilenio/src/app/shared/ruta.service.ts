@@ -17,19 +17,19 @@ export class RutaService {
   constructor(private http: HttpClient) {}
 
   // Método para listar todos los Rutaes
-  listarRutaes(): Observable<RutaDTO[]> {
-    return this.http.get<RutaDTO[]>(`${environment.SERVER_URL}/ruta/list`);
+  listarRutas(): Observable<RutaDTO[]> {
+    return this.http.get<RutaDTO[]>(`${environment.SERVER_URL}/Ruta/list`);
   }
 
   // Método para recuperar un Ruta por ID
   RutacarRutaPorId(id: number): Observable<RutaDTO> {
-    return this.http.get<RutaDTO>(`${environment.SERVER_URL}/ruta/view/${id}`);
+    return this.http.get<RutaDTO>(`${environment.SERVER_URL}/Ruta/view/${id}`);
   }
 
   // Método para crear un nuevo Ruta
   crearRuta(RutaDTO: RutaDTO): Observable<RutaDTO> {
     return this.http.post<RutaDTO>(
-      `${environment.SERVER_URL}/ruta/create`,
+      `${environment.SERVER_URL}/Ruta/create`,
       RutaDTO,
       this.httpOptions
     );

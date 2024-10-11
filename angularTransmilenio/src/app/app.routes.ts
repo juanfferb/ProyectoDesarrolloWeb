@@ -11,6 +11,10 @@ import { BusComponent } from './bus/bus.component';
 import { BusListComponent } from './bus/list/list.component';
 import { BusCreateComponent } from './bus/create/create.component';
 import { BusViewComponent } from './bus/view/view.component';
+//import { BusEditComponent } from './bus/edit/edit.component';
+import { RutaListComponent } from './ruta/list/list.component';
+import { RutaCreateComponent } from './ruta/create/create.component';
+import { RutaViewComponent } from './ruta/view/view.component';
 
 export const routes: Routes = [
     { path: 'asignacion/asignacion-create', component: AsignacionCreateComponent },
@@ -23,6 +27,9 @@ export const routes: Routes = [
     { path: 'bus/list', component: BusListComponent },
     { path: 'bus/create', component: BusCreateComponent },
     { path: 'bus/view/:id', component: BusViewComponent },
+    { path: 'ruta/list', component: RutaListComponent },
+    { path: 'ruta/create', component: RutaCreateComponent },
+    { path: 'ruta/view/:id', component: RutaViewComponent },
     //{ path: 'bus/edit', component: BusEditComponent },
     { path: 'ruta', component: RutaComponent },
     { path: 'bus', component: BusComponent},

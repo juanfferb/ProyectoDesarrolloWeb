@@ -1,0 +1,56 @@
+<div class="BarraNavegacion">
+    <ul>
+        <li><img src="https://julicastiblanco.wordpress.com/wp-content/uploads/2017/02/wordpress-biarticulado-01.png?w=1000" height="60px" alt="Logo"></li>
+        <li><a [routerLink]="['/conductor/conductor-list']">Coordinador</a></li>
+        <li><a [routerLink]="['/ruta/list']">Rutas</a></li>
+        <li><a [routerLink]="['/bus']">Bus</a></li>
+    </ul>
+</div>
+
+<img class="rutas1" src="https://www.sitp.gov.co/publicaciones/40236/mapas-transmilenio/info/sitp/media/img75080.jpg" alt="Rutas">
+
+<p class="Texto1">
+    Como administrador tiene la opción de visualizar las rutas existentes que pueden tener los conductores, 
+    lo que facilita la gestión de las mismas, adicionalemnte, puede ver las estaciones que tiene asociada esta ruta,
+    ver la ruta detalladamente y editar o elimiar esta ruta.
+</p>
+
+<table class="entity-list">
+    <thead>
+        <tr>
+            <th>Codigo</th>
+            <th>Estaciones</th>
+            <th>Horario</th>
+            <th>Editar</th>
+            <th>Ver</th>
+            <th>Eliminar</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let c of allRutas$ | async">
+            <tr *ngIf="c.codigo">
+                <td>{{ c.codigo }}</td>
+                <td>{{ c.estaciones }}</td>
+                <td>{{ c.horario }}</td>
+                <td>
+                    <a class="botonRojo" [routerLink]="['/ruta/edit', c.id]">Editar</a>
+                </td>
+                <td>
+                    <a class="botonRojo" [routerLink]="['/ruta/view', c.id]">Ver</a>
+                </td>
+                <td>
+                    <button class="botonRojo" (click)="deleteRuta(c.id!)">Eliminar</button>
+                </td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>
+
+<img class="rutas2" src="https://laud.udistrital.edu.co/sites/default/files/imagen-noticia/2022-11/laud-transmilenio-semana.jpg" alt="Conductores2">
+
+<p class="Texto2">
+    Adicionalemnte puede crear nuevas rutas según sea necesario, 
+    asegurando así una mejor coordinación y facilidad en la administración de rutas.
+</p>
+
+<a class="botonRojoBuscar" [routerLink]="['/ruta/create']">Agregar Ruta</a>

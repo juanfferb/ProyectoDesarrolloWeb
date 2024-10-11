@@ -1,0 +1,34 @@
+<p>Ruta-create works!</p>
+<div class="BarraNavegacion">
+    <ul>
+        <li><img src="https://julicastiblanco.wordpress.com/wp-content/uploads/2017/02/wordpress-biarticulado-01.png?w=1000" height="60px" alt="Logo"></li>
+        <li><a [routerLink]="['/conductor/conductor-list']">Coordinador</a></li>
+        <li><a [routerLink]="['/ruta/list']">Rutas</a></li>
+        <li><p>Buses</p></li>
+    </ul>
+</div>
+
+<div class="formcontainer">
+    <h1 class="tituloRutas">Crear Ruta</h1>
+    <form (ngSubmit)="createRuta()">
+        <div class="form-group">
+            <label for="codigo">Código:</label>
+            <input type="text" id="codigo" [(ngModel)]="newRuta.codigo" name="codigo" required />
+            <br />
+        </div>
+        <div class="form-group">
+            <label for="estaciones">Estaciones:</label>
+            <input type="text" id="estaciones" [(ngModel)]="newRuta.estaciones" name="estaciones" required />
+            <br />
+        </div>
+        <div class="form-group">
+            <label for="horario">Horario:</label>
+            <input type="text" id="horario" [(ngModel)]="newRuta.horario" name="horario" required />
+            <br />
+        </div>
+        <div class="button-container">
+            <button type="submit" class="botonRojo">Guardar</button>
+            <a class="cancel-button" [routerLink]="['/ruta/list']">Cancelar</a>
+        </div>
+    </form>
+</div>
