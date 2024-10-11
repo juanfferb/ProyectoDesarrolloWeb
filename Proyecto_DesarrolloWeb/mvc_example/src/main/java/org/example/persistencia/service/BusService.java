@@ -46,13 +46,13 @@ public class BusService {
         return BusDTOConverter.entityToDTO(BusRepository.save(Bus));
     }
 
-    public BusDTO actualizarBus(Long id, BusDTO busDTO) {
+    public BusDTO actualizarBus(Long id, BusDTO BusDTO) {
         Bus bus = BusRepository.findById(id).orElseThrow(() -> new RuntimeException("Bus no encontrado"));
-        bus.setModelo(busDTO.getModelo());
-        bus.setPlaca(busDTO.getPlaca());
+        bus.setModelo(BusDTO.getModelo());
+        bus.setPlaca(BusDTO.getPlaca());
         BusRepository.save(bus);
         return BusDTOConverter.entityToDTO(bus);
-    }   
+    }  
 
     public void eliminarBus(Long id) {
         // Primero eliminamos las asignaciones asociadas al conductor

@@ -41,6 +41,10 @@ export class BusService {
     return this.http.get<BusDTO[]>(`${environment.SERVER_URL}/Bus/search?nombre=${textoBusqueda}`);
   }
 
+  actualizarBus(bus: BusDTO): Observable<BusDTO> {
+    return this.http.put<BusDTO>(`${environment.SERVER_URL}/Bus/update/${bus.id}`, bus)
+  }
+
   // Método para eliminar un Bus por ID
   eliminarBus(id: number): Observable<void> {
     return this.http.delete<void>(`${environment.SERVER_URL}/Bus/delete/${id}`);

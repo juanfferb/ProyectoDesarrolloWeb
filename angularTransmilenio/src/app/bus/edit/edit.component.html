@@ -1,1 +1,22 @@
-<p>edit works!</p>
+<div class="formcontainer">
+    <h1>Editar Bus</h1>
+    <form (ngSubmit)="updateBus()">
+        <input type="hidden" [(ngModel)]="updatedBus.id" name="id">
+ 
+        <div class="form-group">
+            <label for="busModelo">Modelo:</label>
+            <input type="text" id="busModelo" [(ngModel)]="updatedBus.modelo" name="modelo" required />
+            <span *ngIf="errorMessage">{{ errorMessage }}</span>
+        </div>
+ 
+        <div class="form-group">
+            <label for="busPlaca">Placa:</label>
+            <input type="text" id="busPlaca" [(ngModel)]="updatedBus.placa" name="placa" required />
+            <span *ngIf="errorMessage">{{ errorMessage }}</span>
+        </div>
+        <div class="button-container">
+            <button type="submit" class="save-button">Guardar</button>
+            <a class="cancel-button" [routerLink]="['/bus/list']">Cancelar</a>
+        </div>
+    </form>
+</div>
