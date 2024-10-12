@@ -23,7 +23,7 @@ export class RutaViewComponent {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.Ruta$ = this.RutaService.RutacarRutaPorId(id).pipe(
+    this.Ruta$ = this.RutaService.buscarRutaPorId(id).pipe(
       catchError(error => {
         console.error("Error al buscar la Ruta", error);
         this.errorMessage = "Error al buscar la Ruta";

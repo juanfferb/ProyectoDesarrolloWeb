@@ -1,0 +1,27 @@
+<div class="formcontainer">
+    <h1>Editar Ruta</h1>
+    <form (ngSubmit)="updateRuta()">
+        <input type="hidden" [(ngModel)]="updatedRuta.id" name="id">
+ 
+        <div class="form-group">
+            <label for="rutaCodigo">Código:</label>
+            <input type="text" id="rutaCodigo" [(ngModel)]="updatedRuta.codigo" name="codigo" required />
+            <span *ngIf="errorMessage">{{ errorMessage }}</span>
+        </div>
+ 
+        <div class="form-group">
+            <label for="rutaEstaciones">Estaciones:</label>
+            <input type="text" id="rutaEstaciones" [(ngModel)]="updatedRuta.estaciones" name="estaciones" required />
+            <span *ngIf="errorMessage">{{ errorMessage }}</span>
+        </div>
+        <div class="form-group">
+            <label for="rutaHorario">Horario:</label>
+            <input type="text" id="rutaHorario" [(ngModel)]="updatedRuta.horario" name="horario" required />
+            <span *ngIf="errorMessage">{{ errorMessage }}</span>
+        </div>
+        <div class="button-container">
+            <button type="submit" class="save-button">Guardar</button>
+            <a class="cancel-button" [routerLink]="['/ruta/list']">Cancelar</a>
+        </div>
+    </form>
+</div>

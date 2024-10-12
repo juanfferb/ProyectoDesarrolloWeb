@@ -22,7 +22,7 @@ export class RutaService {
   }
 
   // Método para recuperar un Ruta por ID
-  RutacarRutaPorId(id: number): Observable<RutaDTO> {
+  buscarRutaPorId(id: number): Observable<RutaDTO> {
     return this.http.get<RutaDTO>(`${environment.SERVER_URL}/Ruta/view/${id}`);
   }
 
@@ -36,12 +36,16 @@ export class RutaService {
   }
 
   // Método para Rutacar Rutaes por nombre
-  RutacarRutaPorNombre(textoRutaqueda: string): Observable<RutaDTO[]> {
-    return this.http.get<RutaDTO[]>(`${environment.SERVER_URL}/ruta/search?nombre=${textoRutaqueda}`);
+  buscarRutaPorNombre(textoRutaqueda: string): Observable<RutaDTO[]> {
+    return this.http.get<RutaDTO[]>(`${environment.SERVER_URL}/Ruta/search?nombre=${textoRutaqueda}`);
+  }
+
+  actualizarRuta(ruta: RutaDTO): Observable<RutaDTO> {
+    return this.http.put<RutaDTO>(`${environment.SERVER_URL}/Ruta/update/${ruta.id}`, ruta)
   }
 
   // Método para eliminar un Ruta por ID
   eliminarRuta(id: number): Observable<void> {
-    return this.http.delete<void>(`${environment.SERVER_URL}/ruta/delete/${id}`);
+    return this.http.delete<void>(`${environment.SERVER_URL}/Ruta/delete/${id}`);
   }
 }

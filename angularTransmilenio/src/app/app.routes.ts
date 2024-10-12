@@ -15,6 +15,8 @@ import { BusEditComponent } from './bus/edit/edit.component';
 import { RutaListComponent } from './ruta/list/list.component';
 import { RutaCreateComponent } from './ruta/create/create.component';
 import { RutaViewComponent } from './ruta/view/view.component';
+import { RutaEditComponent } from './ruta/edit/edit.component';
+
 
 export const routes: Routes = [
     { path: 'asignacion/asignacion-create/:id', component: AsignacionCreateComponent },
@@ -31,6 +33,7 @@ export const routes: Routes = [
     { path: 'ruta/create', component: RutaCreateComponent },
     { path: 'ruta/view/:id', component: RutaViewComponent },
     { path: 'bus/edit/:id', component: BusEditComponent },
+    { path: 'ruta/edit/:id', component: RutaEditComponent },
     { path: 'ruta', component: RutaComponent },
     { path: 'bus', component: BusComponent},
     { path: '', pathMatch: 'full', redirectTo: 'conductor/conductor-list' },

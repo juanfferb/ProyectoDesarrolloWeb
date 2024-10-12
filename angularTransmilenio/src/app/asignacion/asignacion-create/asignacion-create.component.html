@@ -1,44 +1,50 @@
-<p>Asignacion-create works!</p>
-<div class="BarraNavegacion">
-    <ul>
-        <li>
-            <img src="https://julicastiblanco.wordpress.com/wp-content/uploads/2017/02/wordpress-biarticulado-01.png?w=1000" height="60px" alt="Logo">
-        </li>
-        <li><a [routerLink]="['/asignacion/asignacion-list']">Coordinador</a></li>
-        <li><a [routerLink]="['/ruta/list']">Rutas</a></li>
-        <li><a [routerLink]="['/bus/list']">Bus</a></li>
-    </ul>
-</div>
-
 <div class="formcontainer">
     <h1 class="tituloAsignaciones">Crear Asignación</h1>
     <form (ngSubmit)="createAsignacion()">
-        <div class="form-group">
+        <!-- Mostrar el conductor, campo deshabilitado -->
+        <div class="form-group" *ngIf="conductor">
             <label for="conductor">Conductor:</label>
-            <input type="text" id="conductor" [value]="conductor?.nombre" disabled />
+            <input type="text" id="conductor" [value]="conductor.nombre" disabled />
             <br />
         </div>
+
+        <!-- Seleccionar modelo de bus -->
         <div class="form-group">
             <label for="modelo">Modelo bus:</label>
-            <input type="text" id="modelo" [(ngModel)]="newAsignacion.bus.modelo" name="modelo" required />
+            <select id="modelo" [(ngModel)]="newAsignacion.bus" name="modelo" required>
+                <option *ngFor="let bus of buses" [ngValue]="bus">{{ bus?.modelo }}</option>
+            </select>
             <br />
-        </div>        
+        </div>
+
+        <!-- Seleccionar código de la ruta -->
         <div class="form-group">
             <label for="codigo">Código ruta:</label>
-            <input type="text" id="codigo" [(ngModel)]="newAsignacion.ruta.codigo" name="codigo" required />
+            <select id="codigo" [(ngModel)]="newAsignacion.ruta" name="codigo" required>
+                <option *ngFor="let ruta of rutas" [ngValue]="ruta">{{ ruta?.codigo }}</option>
+            </select>
             <br />
         </div>
+
+        <!-- Seleccionar días de asignación -->
         <div class="form-group">
-            <label for="diaAsignacion">Día Asignación:</label>
-            <input type="text" id="diaAsignacion" [(ngModel)]="newAsignacion.diaAsignacion" name="diaAsignacion" required />
+            <label for="diasAsignacion">Días de Asignación:</label>
+            <div *ngFor="let dia of diasSemana">
+                <input type="checkbox" [id]="dia" (change)="onDiaChange(dia, $event)" />
+                <label [for]="dia">{{ dia }}</label>
+            </div>
             <br />
         </div>
+
+        <!-- Mensaje de error -->
         <div *ngIf="errorMessage" class="error-message">
-            <p>{{ errorMessage }}</p> <!-- Mostrar mensaje de error si existe -->
+            <p>{{ errorMessage }}</p>
         </div>
+
+        <!-- Botones de acción -->
         <div class="button-container">
             <button type="submit" class="botonRojo">Guardar</button>
-            <a class="cancel-button" [routerLink]="['/asignacion/asignacion-view']">Cancelar</a>
+            <a class="cancel-button" *ngIf="conductor" [routerLink]="['/asignacion/view', conductor.id]">Cancelar</a>
         </div>
     </form>
 </div>
