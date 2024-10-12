@@ -16,24 +16,21 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./asignacion-view.component.css']
 })
 export class AsignacionViewComponent implements OnInit {
-  asignaciones$: Observable<AsignacionDTO[]> = of([]); // Inicializar como un array vacío
+  asignaciones$: Observable<AsignacionDTO[]> = of([]);
   errorMessage: string = '';
+  conductorId?: number; // Agrega esta variable
 
   constructor(private asignacionService: AsignacionService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.asignaciones$ = this.asignacionService.buscarAsignacionesByConductorId(id).pipe(
+    this.conductorId = Number(this.route.snapshot.paramMap.get('id')); // Guarda el ID
+    this.asignaciones$ = this.asignacionService.buscarAsignacionesByConductorId(this.conductorId).pipe(
       catchError(error => {
         console.error("Error al buscar las asignaciones", error);
         this.errorMessage = "Error al buscar las asignaciones";
-        return of([]); // Retorna un array vacío en caso de error
+        return of([]);
       })
     );
-    
-    this.asignaciones$.subscribe(data => {
-      console.log('Asignaciones:', data); // Asegúrate de que esto sea un array
-    });    
   }
 
   eliminarAsignacion(id: number): void {

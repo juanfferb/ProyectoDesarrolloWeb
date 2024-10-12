@@ -17,7 +17,7 @@ import { RutaCreateComponent } from './ruta/create/create.component';
 import { RutaViewComponent } from './ruta/view/view.component';
 
 export const routes: Routes = [
-    { path: 'asignacion/asignacion-create', component: AsignacionCreateComponent },
+    { path: 'asignacion/asignacion-create/:id', component: AsignacionCreateComponent },
     { path: 'asignacion/view/:id', component: AsignacionViewComponent },  // Incluye el ID para asignación
     { path: 'conductor/conductor-create', component: ConductorCreateComponent },
     { path: 'conductor/edit/:id', component: ConductorEditComponent },  // Incluye el ID para editar

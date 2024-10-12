@@ -18,7 +18,7 @@ export class AsignacionService {
 
   // Método para obtener asignaciones por ID de conductor
   buscarAsignacionesByConductorId(conductorId: number): Observable<AsignacionDTO[]> {
-    return this.http.get<AsignacionDTO[]>(`${environment.SERVER_URL}/asignacion/view/${conductorId}`);
+    return this.http.get<AsignacionDTO[]>(`${environment.SERVER_URL}/asignacion/list/${conductorId}`);
 }
 
   // Método para crear una nueva asignación
