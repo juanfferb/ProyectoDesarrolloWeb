@@ -63,20 +63,20 @@ public class Ruta {
         this.codigo = codigo;
     }
 
-    public String getHorario() {
-        return horario;
-    }
-
-    public void setHorario(String Horario) {
-        this.horario = horario;
-    }
-
     public String getEstaciones() {
         return estaciones;
     }
 
     public void setEstaciones(String Estaciones) {
         this.estaciones = estaciones;
+    }
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public void setHorario(String Horario) {
+        this.horario = horario;
     }
 
     public List<Asignacion> getAsignaciones() {

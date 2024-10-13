@@ -114,12 +114,12 @@ tr:hover {
     text-align: center;
 }
 
-h2{
+.h2{
     padding-top: 80px;
     justify-content: center;
 }
 /* Estilos para la información del conductor */
-.conductor-info-container {
+.Bus-info-container {
     display: flex;
     align-items: center;
     justify-content: center;

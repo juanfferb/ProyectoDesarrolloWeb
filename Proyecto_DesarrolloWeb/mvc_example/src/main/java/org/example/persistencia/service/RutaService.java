@@ -53,7 +53,7 @@ public class RutaService {
     }
 
     public RutaDTO actualizarRuta(Long id, RutaDTO RutaDTO) {
-        Ruta Ruta = RutaRepository.findById(id).orElseThrow(() -> new RuntimeException("Ruta no encontrado"));
+        Ruta Ruta = RutaRepository.findById(id).orElseThrow(() -> new RuntimeException("Ruta no encontrada"));
         Ruta.setCodigo(RutaDTO.getCodigo());
         Ruta.setEstaciones(RutaDTO.getEstaciones());
         Ruta.setHorario(RutaDTO.getHorario());

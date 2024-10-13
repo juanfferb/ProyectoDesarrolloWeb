@@ -53,13 +53,13 @@ public class RutaController {
     }
 
     @GetMapping("/search")
-    public List<RutaDTO> RutacarRutas(@RequestParam(required = false) String searchText) {
+    public List<RutaDTO> buscarRutas(@RequestParam(required = false) String searchText) {
         if (searchText == null || searchText.trim().isEmpty()) {
-            log.info("No hay texto de búsqueda. Retornando todos los Rutaes");
+            log.info("No hay texto de búsqueda. Retornando todos las Rutas");
             return RutaService.listarRutas();
         } else {
-            log.info("Rutacando Rutaes cuyo nombre contiene {}", searchText);
-            return RutaService.RutacarPorCodigo(searchText);
+            log.info("Buscando rutas cuyo nombre contiene {}", searchText);
+            return RutaService.buscarPorCodigo(searchText);
         }
     }
 }

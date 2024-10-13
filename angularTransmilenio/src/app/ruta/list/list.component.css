@@ -361,7 +361,7 @@ tr:hover {
     margin: 40px 0; /* Espacio arriba y abajo del contenedor de imágenes */
 }
 
-.buses1 {
+.rutas1 {
     display: block; /* Para que se comporte como un bloque */
     margin: 20px auto; /* Margen superior e inferior de 20px y centrado horizontal */
     max-width: 90%; /* Ajusta el tamaño máximo de la imagen */
@@ -371,7 +371,7 @@ tr:hover {
 }
 
 /* Estilo para la segunda imagen de conductores */
-.buses2 {
+.rutas2 {
     display: block; /* Para que se comporte como un bloque */
     margin: 20px auto; /* Margen superior e inferior de 20px y centrado horizontal */
     max-width: 90%; /* Ajusta el tamaño máximo de la imagen */
