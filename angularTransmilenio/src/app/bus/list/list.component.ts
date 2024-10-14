@@ -37,18 +37,21 @@ export class BusListComponent {
   }
 
   deleteBus(id: number): void {
-    if (confirm('¿Estás seguro de que quieres eliminar este Bus?')) {
-        this.BusService.eliminarBus(id).subscribe(
-            response => {
-                // Manejar la respuesta, por ejemplo, refrescando la lista de Buses
-                this.ngOnInit();
-            },
-            error => {
-                console.error('Error al eliminar el Bus', error);
-                this.errorMessage = 'Error al eliminar el Bus';
-            }
-        );
+    if (confirm('Recuerde que al eliminar un bus se eliminarán todas las asignaciones asociadas a ese bus. ¿Desea continuar?')) {
+        if (confirm('¿Estás seguro de que quieres eliminar este Bus?')) {
+            this.BusService.eliminarBus(id).subscribe(
+                response => {
+                    // Manejar la respuesta, por ejemplo, refrescando la lista de Buses
+                    this.ngOnInit();
+                },
+                error => {
+                    console.error('Error al eliminar el Bus', error);
+                    this.errorMessage = 'Error al eliminar el Bus';
+                }
+            );
+        }
     }
-}
+  }
+
 
 }

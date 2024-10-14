@@ -37,18 +37,21 @@ export class RutaListComponent {
   }
 
   deleteRuta(id: number): void {
-    if (confirm('¿Estás seguro de que quieres eliminar este Ruta?')) {
-        this.RutaService.eliminarRuta(id).subscribe(
-            response => {
-                // Manejar la respuesta, por ejemplo, refrescando la lista de Rutaes
-                this.ngOnInit();
-            },
-            error => {
-                console.error('Error al eliminar el Ruta', error);
-                this.errorMessage = 'Error al eliminar el Ruta';
-            }
-        );
+    if (confirm('Recuerde que al eliminar una ruta se eliminarán todas las asignaciones asociadas a esa ruta. ¿Desea continuar?')) {
+        if (confirm('¿Estás seguro de que quieres eliminar esta ruta?')) {
+            this.RutaService.eliminarRuta(id).subscribe(
+                response => {
+                    // Manejar la respuesta, por ejemplo, refrescando la lista de rutas
+                    this.ngOnInit();
+                },
+                error => {
+                    console.error('Error al eliminar la ruta', error);
+                    this.errorMessage = 'Error al eliminar la ruta';
+                }
+            );
+        }
     }
-}
+  }
+
 
 }
