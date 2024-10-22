@@ -58,6 +58,20 @@
 			<artifactId>lombok</artifactId>
 			<scope>annotationProcessor</scope>
 		</dependency>
+
+		<!-- WebTestClient -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
+
+		<!-- Playwright -->
+		<dependency>
+			<groupId>com.microsoft.playwright</groupId>
+			<artifactId>playwright</artifactId>
+			<version>1.48.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
