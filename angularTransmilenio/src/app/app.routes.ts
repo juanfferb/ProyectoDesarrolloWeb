@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
 import { AsignacionCreateComponent } from './asignacion/asignacion-create/asignacion-create.component';
 import { AsignacionViewComponent } from './asignacion/asignacion-view/asignacion-view.component';
 import { ConductorCreateComponent } from './conductor/conductor-create/conductor-create.component';
@@ -16,7 +17,8 @@ import { RutaListComponent } from './ruta/list/list.component';
 import { RutaCreateComponent } from './ruta/create/create.component';
 import { RutaViewComponent } from './ruta/view/view.component';
 import { RutaEditComponent } from './ruta/edit/edit.component';
-
+import { AuthGuard } from './guards/auth.guard';
+import { LoginComponent } from './security/login/login.component';
 
 export const routes: Routes = [
     { path: 'asignacion/asignacion-create/:id', component: AsignacionCreateComponent },
@@ -36,6 +38,8 @@ export const routes: Routes = [
     { path: 'ruta/edit/:id', component: RutaEditComponent },
     { path: 'ruta', component: RutaComponent },
     { path: 'bus', component: BusComponent},
-    { path: '', pathMatch: 'full', redirectTo: 'conductor/conductor-list' },
+    { path: 'login', component: LoginComponent },
+    { path: '', pathMatch: 'full', redirectTo: 'login' },
 ];
+
 

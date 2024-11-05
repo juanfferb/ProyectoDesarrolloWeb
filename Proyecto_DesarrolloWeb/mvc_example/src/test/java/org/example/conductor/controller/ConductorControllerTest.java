@@ -50,37 +50,84 @@ public class ConductorControllerTest{
 
     @Test
     void listarConductores() {
-        
+        webTestClient.get().uri(SERVER_URL + "/conductor/list")
+                .exchange()
+                .expectStatus().isOk()  
+                .expectBodyList(ConductorDTO.class)  
+                .hasSize(3);
     }
 
     @Test
     void verConductor() {
-
+        Long idConductor = 1L;
+    
+        webTestClient.get().uri(SERVER_URL + "/conductor/view/{id}", idConductor)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(ConductorDTO.class)
+                .value(conductor -> assertEquals("Juan Pérez", conductor.getNombre()));  // Verifica que el nombre del conductor sea correcto
     }
 
     @Test
     void actualizarConductor() {
-
+        Long idConductor = 1L;
+        ConductorDTO conductorDTO = new ConductorDTO();
+        conductorDTO.setNombre("Juan Pérez Actualizado");
+        conductorDTO.setCedula("1234567890");
+        conductorDTO.setTelefono("+123456789");
+        conductorDTO.setDireccion("Calle Falsa 456");
+    
+        webTestClient.put().uri(SERVER_URL + "/conductor/update/{id}", idConductor)
+                .bodyValue(conductorDTO)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(ConductorDTO.class)
+                .value(conductor -> assertEquals("Juan Pérez Actualizado", conductor.getNombre()));
     }
 
     @Test
     void guardarConductor() {
-
+        Conductor conductor = new Conductor("Ana García", "2233445566", "+1122334455", "Calle Nueva 789");
+    
+        webTestClient.post().uri(SERVER_URL + "/conductor/save")
+                .bodyValue(conductor)
+                .exchange()
+                .expectStatus().isOk(); 
     }
 
     @Test
     void crearConductor() {
-
+        ConductorDTO conductorDTO = new ConductorDTO();
+        conductorDTO.setNombre("Luis Pérez");
+        conductorDTO.setCedula("3344556677");
+        conductorDTO.setTelefono("+9988776655");
+        conductorDTO.setDireccion("Avenida Central 100");
+    
+        webTestClient.post().uri(SERVER_URL + "/conductor/create")
+                .bodyValue(conductorDTO)
+                .exchange()
+                .expectStatus().isOk();  
     }
 
     @Test
     void eliminarConductor() {
-
+        Long idConductor = 1L;
+    
+        webTestClient.delete().uri(SERVER_URL + "/conductor/delete/{id}", idConductor)
+                .exchange()
+                .expectStatus().isOk();  
     }
 
     @Test
     void buscarConductores() {
-
+        String nombreBuscado = "Juan";  
+    
+        webTestClient.get().uri(SERVER_URL + "/conductor/search?nombre={nombre}", nombreBuscado)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBodyList(ConductorDTO.class)
+                .hasSize(1)  
+                .value(conductores -> assertEquals("Juan Pérez", conductores.get(0).getNombre()));
     }
 
 }
