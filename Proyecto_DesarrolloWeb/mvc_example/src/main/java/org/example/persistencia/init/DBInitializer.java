@@ -18,11 +18,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import jakarta.transaction.Transactional;
-
-
 @Profile({ "default" })
+@Component
 public class DBInitializer implements CommandLineRunner {
 
     @Autowired
@@ -52,7 +52,6 @@ public class DBInitializer implements CommandLineRunner {
                 new User("Alice", "Alisson", "alice@alice.com", passwordEncoder.encode("alice123"), Role.ADMIN));
         userRepository.save(
                 new User("Bob", "Bobson", "bob@bob.com", passwordEncoder.encode("bob123"), Role.USER));
-
 
         Conductor conductor1 = new Conductor("Juan Pérez", "1234567890", "+123456789", "Calle Falsa 123");
         Conductor conductor2 = new Conductor("María López", "0987654321", "+987654321", "Avenida Siempreviva 742");

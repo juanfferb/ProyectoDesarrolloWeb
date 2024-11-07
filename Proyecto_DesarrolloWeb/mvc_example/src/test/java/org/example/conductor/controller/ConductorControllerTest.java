@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.example.persistencia.model.Conductor;
+import org.example.persistencia.dto.ConductorDTO;
 import org.example.persistencia.repository.ConductorRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
