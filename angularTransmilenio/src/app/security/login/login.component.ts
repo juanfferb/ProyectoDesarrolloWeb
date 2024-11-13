@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginDto } from '../../dto/login-dto';
 import { AuthService } from '../../shared/auth.service';
+import { ConductorListComponent } from '../../conductor/conductor-list/conductor-list.component';
 import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  imports: [FormsModule, ConductorListComponent],
   standalone:true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: jwt => {
           console.log(jwt);
-          this.router.navigate(["cuenta"]);
+          this.router.navigate(["/conductor/conductor-list"]);
         },
         error: err => { console.error("Login failed:", err) }
       });

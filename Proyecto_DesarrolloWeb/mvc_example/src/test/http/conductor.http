@@ -1,64 +1,146 @@
-### Alice es ADMIN
-# @name login
+### Pruebas para BusDTO
 
-POST http://localhost:8080/auth/login
+# Crear un Bus (ADMIN)
+POST http://localhost:8080/bus
 Content-Type: application/json
+Authorization: Bearer {{adminToken}}
 
 {
-    "email": "alice@alice.com",
-    "password": "alice123"
+    "placa": "ABC123",
+    "modelo": "Mercedes 2022",
+    "conductores": [
+        { "id": 1, "nombre": "Juan Pérez", "cedula": "12345678", "telefono": "123456789", "direccion": "Calle Falsa 123" }
+    ],
+    "asignaciones": []
 }
 
-### Login incorrecto
-POST http://localhost:8080/auth/login
+# Ver Lista de Buses (ADMIN y USER)
+GET http://localhost:8080/bus
+Authorization: Bearer {{userToken}}  // Cambiar a adminToken para probar con ADMIN
+
+# Editar Bus (ADMIN)
+PUT http://localhost:8080/bus/1
 Content-Type: application/json
+Authorization: Bearer {{adminToken}}
 
 {
-    "email": "alice@alice123.com",
-    "password": "alice123"
+    "placa": "DEF456",
+    "modelo": "Volvo 2023",
+    "conductores": [
+        { "id": 2, "nombre": "María García", "cedula": "87654321", "telefono": "987654321", "direccion": "Avenida Siempre Viva 456" }
+    ],
+    "asignaciones": []
 }
-### Bob es USER
-# @name login
 
-POST http://localhost:8080/auth/login
+# Eliminar Bus (ADMIN)
+DELETE http://localhost:8080/bus/1
+Authorization: Bearer {{adminToken}}
+
+
+### Pruebas para ConductorDTO
+
+# Crear un Conductor (ADMIN)
+POST http://localhost:8080/conductor
 Content-Type: application/json
+Authorization: Bearer {{adminToken}}
 
 {
-    "email": "bob@bob.com",
-    "password": "bob123"
+    "nombre": "Carlos Pérez",
+    "cedula": "11223344",
+    "telefono": "567890123",
+    "direccion": "Calle 456",
+    "busesAsignados": [
+        { "id": 1, "placa": "XYZ789", "modelo": "Toyota 2021", "conductores": [], "asignaciones": [] }
+    ]
 }
 
-### Petición con token inválido
-POST http://localhost:8080/cuenta/1/retirar 
+# Ver Lista de Conductores (ADMIN y USER)
+GET http://localhost:8080/conductor
+Authorization: Bearer {{userToken}}  // Cambiar a adminToken para probar con ADMIN
+
+# Editar Conductor (ADMIN)
+PUT http://localhost:8080/conductor/1
 Content-Type: application/json
-
-### Petición con token inválido
-POST http://localhost:8080/cuenta/1/retirar 
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOJib2JAYm9iLmNvbSIsImlhdCI6MTcxNDU4MTMzMSwiZXhwIjoxNzE0NjE3MzMxfQ.4JnhlJAoesdJZBNM9JK2SOi_PY_gqQ6mUMQZStBPFcuLFhzjEOelQk7WiI5Ymqzg
-
-
-10.00
-
-### Alice: Autorizado, Bob: Denegado
-@token = {{login.response.body.$.token}}
-GET http://localhost:8080/cuenta 
-Authorization: Bearer {{token}}
-
-
-
-###
-
-POST http://localhost:8080/auth/signup
-Content-Type: application/json
+Authorization: Bearer {{adminToken}}
 
 {
-    "firstName": "Carla",
-    "lastName": "Carlson",
-    "email": "carla@carla.com",
-    "password": "carla123"
+    "nombre": "Carlos Pérez Modificado",
+    "cedula": "11223344",
+    "telefono": "567890123",
+    "direccion": "Calle 789",
+    "busesAsignados": []
 }
 
+# Eliminar Conductor (ADMIN)
+DELETE http://localhost:8080/conductor/1
+Authorization: Bearer {{adminToken}}
 
-###
-GET http://localhost:8080/h2
+
+### Pruebas para RutaDTO
+
+# Crear una Ruta (ADMIN)
+POST http://localhost:8080/ruta
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "codigo": "RUTA001",
+    "estaciones": "Estación A, Estación B, Estación C",
+    "horario": "08:00 - 18:00",
+    "asignaciones": []
+}
+
+# Ver Lista de Rutas (ADMIN y USER)
+GET http://localhost:8080/ruta
+Authorization: Bearer {{userToken}}  // Cambiar a adminToken para probar con ADMIN
+
+# Editar Ruta (ADMIN)
+PUT http://localhost:8080/ruta/1
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "codigo": "RUTA002",
+    "estaciones": "Estación D, Estación E",
+    "horario": "10:00 - 20:00",
+    "asignaciones": []
+}
+
+# Eliminar Ruta (ADMIN)
+DELETE http://localhost:8080/ruta/1
+Authorization: Bearer {{adminToken}}
+
+
+### Pruebas para AsignacionDTO
+
+# Crear una Asignación (ADMIN)
+POST http://localhost:8080/asignacion
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "conductor": { "id": 1 },
+    "bus": { "id": 1 },
+    "ruta": { "id": 1 },
+    "diasAsignacion": "Lunes, Miércoles, Viernes"
+}
+
+# Ver Lista de Asignaciones (ADMIN y USER)
+GET http://localhost:8080/asignacion
+Authorization: Bearer {{userToken}}  // Cambiar a adminToken para probar con ADMIN
+
+# Editar Asignación (ADMIN)
+PUT http://localhost:8080/asignacion/1
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "conductor": { "id": 2 },
+    "bus": { "id": 2 },
+    "ruta": { "id": 2 },
+    "diasAsignacion": "Martes, Jueves"
+}
+
+# Eliminar Asignación (ADMIN)
+DELETE http://localhost:8080/asignacion/1
+Authorization: Bearer {{adminToken}}
