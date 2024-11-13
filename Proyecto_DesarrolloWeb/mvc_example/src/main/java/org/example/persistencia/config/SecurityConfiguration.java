@@ -47,11 +47,14 @@ public class SecurityConfiguration {
         return http
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(request -> request.requestMatchers("/auth/**")
-                        .permitAll()
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/conductor/list", "/conductor/view/**", "/conductor/search")
+                            .hasAnyRole("USER", "ADMIN") // Permitir acceso a USER y ADMIN
+                        .requestMatchers("/conductor/create", "/conductor/save", "/conductor/update/**", "/conductor/delete/**")
+                            .hasRole("ADMIN") // Solo ADMIN puede crear, actualizar y eliminar conductores
                         .anyRequest().authenticated()
-
-                )
+                    )
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(
                         jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
@@ -89,4 +92,7 @@ public class SecurityConfiguration {
             }
         };
     }
+
+    
+    
 }

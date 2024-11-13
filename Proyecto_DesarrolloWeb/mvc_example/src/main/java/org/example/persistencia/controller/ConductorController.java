@@ -8,6 +8,7 @@ import org.example.persistencia.service.ConductorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
@@ -20,36 +21,43 @@ public class ConductorController {
     @Autowired
     private ConductorService conductorService;
 
+    @Secured({ "USER", "ADMIN" })
     @GetMapping("/list")
     public List<ConductorDTO> listarConductores() {
         return conductorService.listarconductores();
     }
 
+    @Secured({ "USER", "ADMIN" })
     @GetMapping("/view/{id}")
     public ConductorDTO verConductor(@PathVariable("id") Long id) {
         return conductorService.recuperarConductor(id);
     }
 
+    @Secured({ "ADMIN" })
     @PutMapping("/update/{id}")
     public ConductorDTO actualizarConductor(@PathVariable Long id, @Valid @RequestBody ConductorDTO conductorDTO) {
     return conductorService.actualizarConductor(id, conductorDTO);
     }
 
+    @Secured({ "ADMIN" })
     @PostMapping("/save")
     public void guardarConductor(@Valid @RequestBody Conductor conductor) {
         conductorService.guardarConductor(conductor);
     }
 
+    @Secured({ "ADMIN" })
     @PostMapping("/create")
     public void crearConductor(@Valid @RequestBody ConductorDTO conductorDTO) {
         conductorService.crearConductor(conductorDTO);
     }
 
+    @Secured({ "ADMIN" })
     @DeleteMapping("/delete/{id}")
     public void eliminarConductor(@PathVariable("id") Long id) {
         conductorService.eliminarConductor(id);
     }
 
+    @Secured({ "USER", "ADMIN" })
     @GetMapping("/search")
     public List<ConductorDTO> buscarConductores(@RequestParam(required = false) String nombre) {
         System.out.println(nombre);
