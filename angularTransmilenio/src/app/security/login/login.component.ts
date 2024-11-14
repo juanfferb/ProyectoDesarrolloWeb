@@ -27,7 +27,20 @@ export class LoginComponent implements OnInit {
     try {
       await this.auth.login(this.loginDto); // Espera a que login complete
       console.log("Login exitoso");
-      this.router.navigate(["/conductor/conductor-list"]); // Navega después de que login haya terminado
+
+      // Obtén el rol del usuario desde el servicio AuthService
+      const role = this.auth.role(); 
+
+      // Redirige según el rol
+      if (role === 'ADMIN') {
+        this.router.navigate(['/ruta/list']);  // Redirige al panel de administración
+      } else if (role === 'COORD') {
+        this.router.navigate(['/conductor/conductor-list']);  // Redirige al listado de conductores
+      } else if (role === 'USER') {
+        this.router.navigate(['/ruta/list']);  // Redirige a la lista de rutas
+      } else {
+        this.router.navigate(['/login']);  // Redirige a login si no hay rol válido
+      }
     } catch (err) {
       console.error("Error en el inicio de sesión:", err);
       this.loginError = "Credenciales incorrectas, por favor intenta nuevamente.";

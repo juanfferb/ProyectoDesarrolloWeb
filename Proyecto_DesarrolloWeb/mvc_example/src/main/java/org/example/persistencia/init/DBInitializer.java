@@ -52,7 +52,9 @@ public class DBInitializer implements CommandLineRunner {
                 new User("Alice", "Alisson", "alice@alice.com", passwordEncoder.encode("alice123"), Role.ADMIN));
         userRepository.save(
                 new User("Bob", "Bobson", "bob@bob.com", passwordEncoder.encode("bob123"), Role.USER));
-
+        userRepository.save(
+                new User("Carlos", "Cruz", "carlos@carlos.com", passwordEncoder.encode("carlos123"), Role.COORD));
+        
         Conductor conductor1 = new Conductor("Juan Pérez", "1234567890", "+123456789", "Calle Falsa 123");
         Conductor conductor2 = new Conductor("María López", "0987654321", "+987654321", "Avenida Siempreviva 742");
         Conductor conductor3 = new Conductor("Carlos García", "1122334455", "+1122334455", "Boulevard de los Sueños 1010");

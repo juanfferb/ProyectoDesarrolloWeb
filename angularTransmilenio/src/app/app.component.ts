@@ -13,5 +13,5 @@ import { ConductorViewComponent } from './conductor/conductor-view/conductor-vie
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Proyecto2';
+  title = 'Transmmilenio';
 }
