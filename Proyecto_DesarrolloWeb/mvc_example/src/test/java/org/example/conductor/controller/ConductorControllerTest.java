@@ -54,7 +54,7 @@ public class ConductorControllerTest {
     void init() {
         // Usuario para las pruebas
         userRepository.save(
-                new User("Alice", "Alisson", "alice@alice.com", passwordEncoder.encode("alice123"), Role.ADMIN));
+                new User("Carlos", "Cruz", "carlos@carlos.com", passwordEncoder.encode("carlos123"), Role.COORD));
         userRepository.save(
                 new User("Bob", "Bobson", "bob@bob.com", passwordEncoder.encode("bob123"), Role.USER));
         
@@ -81,12 +81,11 @@ public class ConductorControllerTest {
 
     @Test
     void listarConductores() {
-        JwtAuthenticationResponse alice = login("alice@alice.com", "alice123");
+        JwtAuthenticationResponse carlos = login("carlos@carlos.com", "carlos123");
         JwtAuthenticationResponse bob = login("bob@bob.com", "bob123");
 
-        // Verificar que el admin (Alice) puede acceder a la lista de conductores
-        webTestClient.get().uri(SERVER_URL + "/conductor/list")
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + alice.getToken())
+       webTestClient.get().uri(SERVER_URL + "/conductor/list")
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + carlos.getToken())
                 .exchange()
                 .expectStatus().isOk()
                 .expectBodyList(ConductorDTO.class)
@@ -106,10 +105,10 @@ public class ConductorControllerTest {
     void verConductor() {
         Long idConductor = 1L;
 
-        // Probar con un ADMIN
-        JwtAuthenticationResponse alice = login("alice@alice.com", "alice123");
+        // Probar con un COORD
+        JwtAuthenticationResponse carlos = login("carlos@carlos.com", "carlos123");
         webTestClient.get().uri(SERVER_URL + "/conductor/view/{id}", idConductor)
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + alice.getToken())
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + carlos.getToken())
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(ConductorDTO.class)
@@ -124,14 +123,13 @@ public class ConductorControllerTest {
                 .expectBody(ConductorDTO.class)
                 .value(conductor -> assertEquals("Juan Pérez", conductor.getNombre()));
     }
-
-
-        @Test
-        void actualizarConductorAutorizado() {
+    
+    @Test
+    void actualizarConductorAutorizado() {
         Long idConductor = 1L;
 
-        // Probar con un ADMIN (Alice)
-        JwtAuthenticationResponse alice = login("alice@alice.com", "alice123");
+        // Probar con un COORD
+        JwtAuthenticationResponse carlos = login("carlos@carlos.com", "carlos123");
         ConductorDTO conductorDTO = new ConductorDTO();
         conductorDTO.setNombre("Juan Pérez Actualizado");
         conductorDTO.setCedula("1234567890");
@@ -139,7 +137,7 @@ public class ConductorControllerTest {
         conductorDTO.setDireccion("Calle Falsa 456");
 
         webTestClient.put().uri(SERVER_URL + "/conductor/update/{id}", idConductor)
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + alice.getToken())
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + carlos.getToken())
                 .bodyValue(conductorDTO)
                 .exchange()
                 .expectStatus().isOk()
@@ -166,12 +164,12 @@ public class ConductorControllerTest {
 
     @Test
     void guardarConductorAutorizado() {
-        // Probar con un ADMIN (Alice)
-        JwtAuthenticationResponse alice = login("alice@alice.com", "alice123");
+        // Probar con un COORD
+        JwtAuthenticationResponse carlos = login("carlos@carlos.com", "carlos123");
         Conductor conductor = new Conductor("Ana García", "2233445566", "+1122334455", "Calle Nueva 789");
 
         webTestClient.post().uri(SERVER_URL + "/conductor/save")
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + alice.getToken())
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + carlos.getToken())
                 .bodyValue(conductor)
                 .exchange()
                 .expectStatus().isOk();  // Alice (ADMIN) puede guardar un conductor
@@ -199,9 +197,9 @@ public class ConductorControllerTest {
 
     @Test
     void crearConductorAutorizado() {
-        // Probar con un ADMIN (Alice)
-        JwtAuthenticationResponse alice = login("alice@alice.com", "alice123");
-
+        // Probar con un COORD
+        JwtAuthenticationResponse carlos = login("carlos@carlos.com", "carlos123");
+        
         ConductorDTO conductorDTO = new ConductorDTO();
         conductorDTO.setNombre("Luis Pérez");
         conductorDTO.setCedula("3344556677");
@@ -209,10 +207,10 @@ public class ConductorControllerTest {
         conductorDTO.setDireccion("Avenida Central 100");
 
         webTestClient.post().uri(SERVER_URL + "/conductor/create")
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + alice.getToken())
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + carlos.getToken())
                 .bodyValue(conductorDTO)
                 .exchange()
-                .expectStatus().isOk();  // Alice (ADMIN) puede crear un conductor
+                .expectStatus().isOk(); 
 
     }
 
@@ -238,14 +236,12 @@ public class ConductorControllerTest {
     void eliminarConductorAutorizado() {
         Long idConductor = 1L;
 
-        // Probar con un ADMIN (Alice)
-        JwtAuthenticationResponse alice = login("alice@alice.com", "alice123");
-
+        JwtAuthenticationResponse carlos = login("carlos@carlos.com", "carlos123");
+        
         webTestClient.delete().uri(SERVER_URL + "/conductor/delete/{id}", idConductor)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + alice.getToken())
                 .exchange()
-                .expectStatus().isOk();  // Alice (ADMIN) puede eliminar el conductor
-
+                .expectStatus().isOk();  
     }
 
     @Test
@@ -264,12 +260,12 @@ public class ConductorControllerTest {
     @Test
     void buscarConductores() {
         String nombreBuscado = "Juan";  // Nombre que se busca
-        JwtAuthenticationResponse alice = login("alice@alice.com", "alice123");
+        JwtAuthenticationResponse carlos = login("carlos@carlos.com", "carlos123");
         JwtAuthenticationResponse bob = login("bob@bob.com", "bob123");
 
         // Probar con un ADMIN (Alice)
         webTestClient.get().uri(SERVER_URL + "/conductor/search?nombre={nombre}", nombreBuscado)
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + alice.getToken())
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + carlos.getToken())
                 .exchange()
                 .expectStatus().isOk()
                 .expectBodyList(ConductorDTO.class)
