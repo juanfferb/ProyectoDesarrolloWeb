@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { Routes, provideRouter } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { AsignacionCreateComponent } from './asignacion/asignacion-create/asignacion-create.component';
 import { AsignacionViewComponent } from './asignacion/asignacion-view/asignacion-view.component';
@@ -19,6 +19,13 @@ import { RutaViewComponent } from './ruta/view/view.component';
 import { RutaEditComponent } from './ruta/edit/edit.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './security/login/login.component';
+import { AuthInterceptor } from './interceptor/auth.interceptor'; // Importa tu interceptor
+import { bootstrapApplication } from '@angular/platform-browser';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { MainComponent } from './main/main.component';
+
+
 
 export const routes: Routes = [
     { path: 'asignacion/asignacion-create/:id', component: AsignacionCreateComponent },
@@ -42,4 +49,15 @@ export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'login' },
 ];
 
+bootstrapApplication(MainComponent, {
+    providers: [
+        provideRouter(routes),
+        provideHttpClient(withInterceptorsFromDi()),
+        { 
+            provide: HTTP_INTERCEPTORS, 
+            useClass: AuthInterceptor, 
+            multi: true 
+        }
+    ]
+}).catch(err => console.error(err));
 

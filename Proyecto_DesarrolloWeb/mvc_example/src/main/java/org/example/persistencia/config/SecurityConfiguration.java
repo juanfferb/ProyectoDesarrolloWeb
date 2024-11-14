@@ -23,14 +23,13 @@ import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
-
 import org.example.persistencia.service.UserService;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
+@EnableMethodSecurity(prePostEnabled = true,securedEnabled = true, jsr250Enabled =  true)
 public class SecurityConfiguration {
-    @Autowired
+     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
     @Autowired
     private UserService userService;
@@ -47,14 +46,11 @@ public class SecurityConfiguration {
         return http
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(request -> request
-                        .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/conductor/list", "/conductor/view/**", "/conductor/search")
-                            .hasAnyRole("USER", "ADMIN") // Permitir acceso a USER y ADMIN
-                        .requestMatchers("/conductor/create", "/conductor/save", "/conductor/update/**", "/conductor/delete/**")
-                            .hasRole("ADMIN") // Solo ADMIN puede crear, actualizar y eliminar conductores
+                .authorizeHttpRequests(request -> request.requestMatchers("/auth/**")
+                        .permitAll()
                         .anyRequest().authenticated()
-                    )
+
+                )
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(
                         jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
@@ -86,13 +82,14 @@ public class SecurityConfiguration {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(@NonNull CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:4200").allowedMethods("PUT", "DELETE", "GET", "POST", "PATCH")
-                ;
+                registry.addMapping("/**")
+                .allowedOrigins("http://localhost:4200")
+                .allowedMethods("PUT", "DELETE", "GET", "POST", "PATCH")
+                .allowedHeaders("Authorization", "Content-Type")
+                .exposedHeaders("Authorization");
+                
 
             }
         };
     }
-
-    
-    
 }

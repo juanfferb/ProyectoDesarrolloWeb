@@ -17,10 +17,11 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
+
 @Service
 public class JwtService {
 
-    private static Duration tokeDuration = Duration.ofHours(10);
+    private static Duration tokeDuration = Duration.ofHours(5);
 
     @Value("${jwt.signing-key}")
     private String jwtPrivateKey;
@@ -68,4 +69,5 @@ public class JwtService {
         byte[] keyBytes = Decoders.BASE64.decode(jwtPrivateKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
+    
 }

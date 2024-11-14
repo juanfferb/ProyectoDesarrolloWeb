@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { LoginDto } from '../dto/login-dto';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { JwtAuthenticationResponse } from '../dto/jwt-authentication-response';
-import { map } from 'rxjs/operators';
+import { LoginDto } from '../dto/login-dto';
 import { environment } from '../../environments/environment';
-
+import { lastValueFrom } from 'rxjs';
 
 const JWT_TOKEN = "jwt-token";
 const EMAIL = "user-email";
@@ -15,17 +13,18 @@ const ROLE = "user-role";
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  login(loginDto: LoginDto): Observable<JwtAuthenticationResponse> {
-    return this.http.post<JwtAuthenticationResponse>(`${environment.SERVER_URL}/auth/login`, loginDto)
-      .pipe(map(jwt => {
-        // Importante: https://stackoverflow.com/questions/27067251/where-to-store-jwt-in-browser-how-to-protect-against-csrf
-        sessionStorage.setItem(JWT_TOKEN, jwt.token);
-        sessionStorage.setItem(EMAIL, jwt.email);
-        sessionStorage.setItem(ROLE, jwt.role);
-        return jwt;
-      }));
+  login(loginDto: LoginDto): Promise<void> {
+    return lastValueFrom(
+      this.http.post<JwtAuthenticationResponse>(`${environment.SERVER_URL}/auth/login`, loginDto)
+    ).then((jwt: JwtAuthenticationResponse) => {
+      // Guarda los valores en sessionStorage
+      sessionStorage.setItem(JWT_TOKEN, jwt.token);
+      sessionStorage.setItem(EMAIL, jwt.email);
+      sessionStorage.setItem(ROLE, jwt.role);
+      console.log("Token guardado:", jwt.token); // Verifica el token
+    });
   }
 
   logout() {

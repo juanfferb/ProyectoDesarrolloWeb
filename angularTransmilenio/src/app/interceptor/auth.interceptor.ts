@@ -16,13 +16,14 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private auth: AuthService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    console.log("AuthInterceptor ejecutado");
     let token = this.auth.token();
-
+    console.log("Token en interceptor:", token);
     if (token == null) {
       return next.handle(request);
     } else {
       return next.handle(request.clone({
-        headers: request.headers.set('Authorization', `Bearer ${token}`),
+        headers: request.headers.set('Authorization', `Bearer ${token}`), // corregido aquí
       }));
     }
   }
