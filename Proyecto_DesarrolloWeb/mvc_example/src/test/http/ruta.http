@@ -1,0 +1,27 @@
+POST http://localhost:8080/ruta
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "codigo": "RUTA001",
+    "estaciones": "Estación A, Estación B, Estación C",
+    "horario": "08:00 - 18:00",
+    "asignaciones": []
+}
+
+GET http://localhost:8080/ruta
+Authorization: Bearer {{userToken}}  // Cambiar a adminToken para probar con ADMIN
+
+PUT http://localhost:8080/ruta/1
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "codigo": "RUTA002",
+    "estaciones": "Estación D, Estación E",
+    "horario": "10:00 - 20:00",
+    "asignaciones": []
+}
+
+DELETE http://localhost:8080/ruta/1
+Authorization: Bearer {{adminToken}}

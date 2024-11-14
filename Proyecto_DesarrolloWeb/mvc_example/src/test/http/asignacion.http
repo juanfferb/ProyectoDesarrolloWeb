@@ -1,0 +1,27 @@
+POST http://localhost:8080/asignacion
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "conductor": { "id": 1 },
+    "bus": { "id": 1 },
+    "ruta": { "id": 1 },
+    "diasAsignacion": "Lunes, Miércoles, Viernes"
+}
+
+GET http://localhost:8080/asignacion
+Authorization: Bearer {{userToken}}  // Cambiar a adminToken para probar con ADMIN
+
+PUT http://localhost:8080/asignacion/1
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "conductor": { "id": 2 },
+    "bus": { "id": 2 },
+    "ruta": { "id": 2 },
+    "diasAsignacion": "Martes, Jueves"
+}
+
+DELETE http://localhost:8080/asignacion/1
+Authorization: Bearer {{adminToken}}

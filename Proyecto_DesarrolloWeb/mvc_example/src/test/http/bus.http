@@ -1,0 +1,32 @@
+POST http://localhost:8080/bus
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "placa": "ABC123",
+    "modelo": "Mercedes 2022",
+    "conductores": [
+        { "id": 1, "nombre": "Juan Pérez", "cedula": "12345678", "telefono": "123456789", "direccion": "Calle Falsa 123" }
+    ],
+    "asignaciones": []
+}
+
+GET http://localhost:8080/bus
+Authorization: Bearer {{userToken}}  // Cambiar a adminToken para probar con ADMIN
+
+
+PUT http://localhost:8080/bus/1
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "placa": "DEF456",
+    "modelo": "Volvo 2023",
+    "conductores": [
+        { "id": 2, "nombre": "María García", "cedula": "87654321", "telefono": "987654321", "direccion": "Avenida Siempre Viva 456" }
+    ],
+    "asignaciones": []
+}
+
+DELETE http://localhost:8080/bus/1
+Authorization: Bearer {{adminToken}}

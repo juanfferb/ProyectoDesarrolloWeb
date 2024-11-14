@@ -1,3 +1,35 @@
+POST http://localhost:8080/conductor
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "nombre": "Carlos Pérez",
+    "cedula": "11223344",
+    "telefono": "567890123",
+    "direccion": "Calle 456",
+    "busesAsignados": [
+        { "id": 1, "placa": "XYZ789", "modelo": "Toyota 2021", "conductores": [], "asignaciones": [] }
+    ]
+}
+
+GET http://localhost:8080/conductor
+Authorization: Bearer {{userToken}}  // Cambiar a adminToken para probar con ADMIN
+
+PUT http://localhost:8080/conductor/1
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "nombre": "Carlos Pérez Modificado",
+    "cedula": "11223344",
+    "telefono": "567890123",
+    "direccion": "Calle 789",
+    "busesAsignados": []
+}
+
+DELETE http://localhost:8080/conductor/1
+Authorization: Bearer {{adminToken}}
+
 ### Pruebas para BusDTO
 
 # Crear un Bus (ADMIN)
