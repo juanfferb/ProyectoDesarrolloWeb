@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
 import java.util.List;
-
 import org.example.persistencia.model.Conductor;
 import org.example.persistencia.model.Role;
 import org.example.persistencia.model.User;
@@ -80,9 +79,8 @@ public class ConductorControllerTest {
     }
 
     @Test
-    void listarConductores() {
+    void listarConductoresAutorizado() {
         JwtAuthenticationResponse carlos = login("carlos@carlos.com", "carlos123");
-        JwtAuthenticationResponse bob = login("bob@bob.com", "bob123");
 
        webTestClient.get().uri(SERVER_URL + "/conductor/list")
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + carlos.getToken())
@@ -91,18 +89,21 @@ public class ConductorControllerTest {
                 .expectBodyList(ConductorDTO.class)
                 .hasSize(3);
 
-        // Verificar que el user (Bob) también puede acceder a la lista de conductores
+    }
+
+    @Test
+    void listarConductoresNoAutorizado() {
+        JwtAuthenticationResponse bob = login("bob@bob.com", "bob123");
+
         webTestClient.get().uri(SERVER_URL + "/conductor/list")
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + bob.getToken())
                 .exchange()
-                .expectStatus().isOk()
-                .expectBodyList(ConductorDTO.class)
-                .hasSize(3);
+                .expectStatus().isEqualTo(HttpStatus.FORBIDDEN);
     }
 
 
     @Test
-    void verConductor() {
+    void verConductorAutorizado() {
         Long idConductor = 1L;
 
         // Probar con un COORD
@@ -114,14 +115,18 @@ public class ConductorControllerTest {
                 .expectBody(ConductorDTO.class)
                 .value(conductor -> assertEquals("Juan Pérez", conductor.getNombre()));
 
+    }
+
+    @Test
+    void verConductorNoAutorizado() {
+        Long idConductor = 1L;
+
         // Probar con un USER
         JwtAuthenticationResponse bob = login("bob@bob.com", "bob123");
         webTestClient.get().uri(SERVER_URL + "/conductor/view/{id}", idConductor)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + bob.getToken())
                 .exchange()
-                .expectStatus().isOk()
-                .expectBody(ConductorDTO.class)
-                .value(conductor -> assertEquals("Juan Pérez", conductor.getNombre()));
+                .expectStatus().isEqualTo(HttpStatus.FORBIDDEN);
     }
     
     @Test
@@ -239,7 +244,7 @@ public class ConductorControllerTest {
         JwtAuthenticationResponse carlos = login("carlos@carlos.com", "carlos123");
         
         webTestClient.delete().uri(SERVER_URL + "/conductor/delete/{id}", idConductor)
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + alice.getToken())
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + carlos.getToken())
                 .exchange()
                 .expectStatus().isOk();  
     }
@@ -258,12 +263,11 @@ public class ConductorControllerTest {
 
 
     @Test
-    void buscarConductores() {
+    void buscarConductoresAutorizado() {
         String nombreBuscado = "Juan";  // Nombre que se busca
         JwtAuthenticationResponse carlos = login("carlos@carlos.com", "carlos123");
-        JwtAuthenticationResponse bob = login("bob@bob.com", "bob123");
 
-        // Probar con un ADMIN (Alice)
+        // Probar con un COORD
         webTestClient.get().uri(SERVER_URL + "/conductor/search?nombre={nombre}", nombreBuscado)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + carlos.getToken())
                 .exchange()
@@ -271,14 +275,17 @@ public class ConductorControllerTest {
                 .expectBodyList(ConductorDTO.class)
                 .hasSize(1)  // Se espera encontrar 1 conductor con el nombre "Juan"
                 .value(conductores -> assertEquals("Juan Pérez", conductores.get(0).getNombre()));  // Verifica el nombre del conductor
+        }
+
+    @Test
+    void buscarConductoresNoAutorizado() {
+        String nombreBuscado = "Juan";  // Nombre que se busca
+        JwtAuthenticationResponse bob = login("bob@bob.com", "bob123");
 
         // Probar con un USER (Bob)
         webTestClient.get().uri(SERVER_URL + "/conductor/search?nombre={nombre}", nombreBuscado)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + bob.getToken())
                 .exchange()
-                .expectStatus().isOk()
-                .expectBodyList(ConductorDTO.class)
-                .hasSize(1)  // Se espera encontrar 1 conductor con el nombre "Juan"
-                .value(conductores -> assertEquals("Juan Pérez", conductores.get(0).getNombre()));  // Verifica el nombre del conductor
+                .expectStatus().isEqualTo(HttpStatus.FORBIDDEN);
     }
 }

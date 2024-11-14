@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
+import org.example.persistencia.PersistenciaApplication;
 import org.example.persistencia.model.Conductor;
 import org.example.persistencia.repository.ConductorRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -29,7 +29,7 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 
 @ActiveProfiles("system-test")
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(classes = PersistenciaApplication.class, webEnvironment = WebEnvironment.DEFINED_PORT)
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 public class ConductorControllerSystemTest{
 
