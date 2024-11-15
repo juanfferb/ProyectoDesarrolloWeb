@@ -1,3 +1,13 @@
+### Login de Alice para obtener el token
+# @name loginAlice
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+    "email": "alice@alice.com",
+    "password": "alice123"
+}
+
 ### Crear un bus (Autorizado solo para Alice)
 @tokenAlice = {{loginAlice.response.body.token}}
 POST http://localhost:8080/bus

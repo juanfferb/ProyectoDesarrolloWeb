@@ -18,6 +18,16 @@ Content-Type: application/json
     "password": "bob123"
 }
 
+### Carlos es COORD
+# @name loginCarlos
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+    "email": "carlos@carlos.com",
+    "password": "carlos123"
+}
+
 ### Login incorrecto
 POST http://localhost:8080/auth/login
 Content-Type: application/json
@@ -25,4 +35,22 @@ Content-Type: application/json
 {
     "email": "alice@alice123.com",
     "password": "alice123"
+}
+
+### Login incorrecto
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+    "email": "bob@bob123.com",
+    "password": "bob123"
+}
+
+### Login incorrecto
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+    "email": "carlos@carlos123.com",
+    "password": "carlos123"
 }
