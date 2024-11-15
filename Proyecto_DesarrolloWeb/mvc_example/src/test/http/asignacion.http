@@ -1,27 +1,21 @@
+### Crear una asignación de conductor a ruta (Autorizado solo para Alice)
+@tokenAlice = {{loginAlice.response.body.token}}
 POST http://localhost:8080/asignacion
 Content-Type: application/json
-Authorization: Bearer {{adminToken}}
+Authorization: Bearer {{tokenAlice}}
 
 {
-    "conductor": { "id": 1 },
-    "bus": { "id": 1 },
-    "ruta": { "id": 1 },
-    "diasAsignacion": "Lunes, Miércoles, Viernes"
+    "conductorId": 1,
+    "rutaId": 101,
+    "busId": 5
 }
 
+### Obtener lista de asignaciones (Autorizado solo para Alice)
 GET http://localhost:8080/asignacion
-Authorization: Bearer {{userToken}}  // Cambiar a adminToken para probar con ADMIN
-
-PUT http://localhost:8080/asignacion/1
 Content-Type: application/json
-Authorization: Bearer {{adminToken}}
+Authorization: Bearer {{tokenAlice}}
 
-{
-    "conductor": { "id": 2 },
-    "bus": { "id": 2 },
-    "ruta": { "id": 2 },
-    "diasAsignacion": "Martes, Jueves"
-}
-
-DELETE http://localhost:8080/asignacion/1
-Authorization: Bearer {{adminToken}}
+### Intento no autorizado con token inválido
+GET http://localhost:8080/asignacion
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpbnZhbGlkIiwiaWF0IjoxNjk3OTI1NjAwLCJleHAiOjE2OTc5MjkyMDB9.MOCK_TOKEN

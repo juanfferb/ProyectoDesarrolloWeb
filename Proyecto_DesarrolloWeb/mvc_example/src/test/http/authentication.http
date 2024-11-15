@@ -1,0 +1,28 @@
+### Alice es ADMIN
+# @name loginAlice
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+    "email": "alice@alice.com",
+    "password": "alice123"
+}
+
+### Bob es USER
+# @name loginBob
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+    "email": "bob@bob.com",
+    "password": "bob123"
+}
+
+### Login incorrecto
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+    "email": "alice@alice123.com",
+    "password": "alice123"
+}

@@ -1,27 +1,21 @@
+### Crear una ruta (Autorizado solo para Alice)
+@tokenAlice = {{loginAlice.response.body.token}}
 POST http://localhost:8080/ruta
 Content-Type: application/json
-Authorization: Bearer {{adminToken}}
+Authorization: Bearer {{tokenAlice}}
 
 {
-    "codigo": "RUTA001",
-    "estaciones": "Estación A, Estación B, Estación C",
-    "horario": "08:00 - 18:00",
-    "asignaciones": []
+    "name": "Ruta 101",
+    "startLocation": "Punto A",
+    "endLocation": "Punto B"
 }
 
+### Obtener lista de rutas (Autorizado solo para Alice)
 GET http://localhost:8080/ruta
-Authorization: Bearer {{userToken}}  // Cambiar a adminToken para probar con ADMIN
-
-PUT http://localhost:8080/ruta/1
 Content-Type: application/json
-Authorization: Bearer {{adminToken}}
+Authorization: Bearer {{tokenAlice}}
 
-{
-    "codigo": "RUTA002",
-    "estaciones": "Estación D, Estación E",
-    "horario": "10:00 - 20:00",
-    "asignaciones": []
-}
-
-DELETE http://localhost:8080/ruta/1
-Authorization: Bearer {{adminToken}}
+### Intento no autorizado con token inválido
+GET http://localhost:8080/ruta
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpbnZhbGlkIiwiaWF0IjoxNjk3OTI1NjAwLCJleHAiOjE2OTc5MjkyMDB9.MOCK_TOKEN
